@@ -7,7 +7,7 @@ import { GlobalService } from './services/global.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private _globalService:GlobalService){
+  constructor(public  _globalService:GlobalService){
     
   }
 }
