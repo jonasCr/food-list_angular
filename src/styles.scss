@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700');
+body {
+    margin: 0;
+    background-color: #fafafa;
+    font-family: 'Roboto', sans-serif;
+}
+
+* {
+    box-sizing: border-box
+}
+
+.main-title h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold
+}
+
+.main-container {
+    margin: 1em;
+    height: 80vh;
+}
