@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: '<your-key>',
-    authDomain: '<your-project-authdomain>',
-    databaseURL: '<your-database-URL>',
-    projectId: '<your-project-id>',
-    storageBucket: '<your-storage-bucket>',
-    messagingSenderId: '<your-messaging-sender-id>'
+    apiKey: "AIzaSyDsr1vY2bk284RUvWkIQOx2-MGkBfuIioE",
+    authDomain: "patata-ac960.firebaseapp.com",
+    databaseURL: "https://patata-ac960.firebaseio.com",
+    projectId: "patata-ac960",
+    storageBucket: "patata-ac960.appspot.com",
+    messagingSenderId: "989069752778"
   }
 };
 

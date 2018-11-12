@@ -7,7 +7,7 @@ export class GlobalService {
     
     title:string= "Hola"
     constructor(){
-        console.log('global')
+        //console.log('global')
     }
 
     setTitle(title:string):void{

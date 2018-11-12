@@ -8,6 +8,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 
@@ -20,7 +23,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatIconModule,
         BrowserAnimationsModule,
         MatToolbarModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatSelectModule,
+        MatButtonModule
     ],
     exports: [
         MatCardModule,
@@ -28,7 +33,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatIconModule,
         BrowserAnimationsModule,
         MatToolbarModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatSelectModule,
+        MatButtonModule
     ],
     providers: [],
 })
