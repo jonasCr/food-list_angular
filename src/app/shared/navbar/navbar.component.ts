@@ -8,7 +8,7 @@ import { GlobalService } from "src/app/services/global.service";
 })
 
 export class NavbarComponent implements OnInit {
-    constructor(private _globalService:GlobalService){}
+    constructor(public _globalService:GlobalService){}
 
     ngOnInit(){
         
