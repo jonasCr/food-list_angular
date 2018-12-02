@@ -40,6 +40,7 @@ export class MenuData {
     }
 
     updateMenu(menu:Menu){
+        console.log(menu);
         return this.collection.doc(menu.idMenu).update(menu.getData());
         
     }

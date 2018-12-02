@@ -12,7 +12,7 @@ import { RecipeData } from "src/app/data/recipe.data";
 export class RecipeComponent implements OnInit{
     recipes:Recipe[] = [];
     constructor(
-        private _globalService:GlobalService,
+        public _globalService:GlobalService,
         private _recipeData:RecipeData
     ){
         this._globalService.setTitle('Recipe');

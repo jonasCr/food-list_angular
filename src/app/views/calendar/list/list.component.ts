@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from "@angular/core";
+import { Component, ViewChild, OnDestroy } from "@angular/core";
 import { GlobalService } from "src/app/services/global.service";
 import { MenuData } from "src/app/data/menu.data";
 import { query } from "src/app/shared/models/query.model";
