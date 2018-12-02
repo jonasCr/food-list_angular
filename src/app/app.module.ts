@@ -30,6 +30,7 @@ import { RecipeComponent } from './views/recipe/recipe.component';
 import { RecipeDetails } from './shared/recipe-details/recipe-details.component';
 import { RecipeEditComponent } from './views/recipe-edit/recipe-edit.component';
 import { RecipeDialogCategory } from './views/recipe-edit/recipe-dialog-category';
+import { RateComponent } from './shared/components/rate/rate.component';
 
 
 
@@ -45,7 +46,8 @@ import { RecipeDialogCategory } from './views/recipe-edit/recipe-dialog-category
     RecipeDetails,
     NumberToArray,
     RecipeEditComponent,
-    RecipeDialogCategory
+    RecipeDialogCategory,
+    RateComponent
   ],
   entryComponents: [
     RecipeDialogCategory

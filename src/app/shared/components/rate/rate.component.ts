@@ -1,0 +1,35 @@
+import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
+
+@Component({
+    selector:'app-rate',
+    template: `
+        <i 
+            (click)="rateRecipe(grade+1)" 
+            *ngFor="let grade of 5 | numberToArray; let i = index" 
+            [ngClass]="{'stars': isStar(i)}" 
+            class="fas fa-star fa-lg"></i>
+    `
+})
+
+export class RateComponent implements OnInit{
+    constructor(){
+        
+    }
+
+    ngOnInit(): void {
+        console.log(this.grade);
+        
+    }
+
+    @Input() grade:number;
+    @Output() updatedGrade:EventEmitter<number> = new EventEmitter;;
+
+    rateRecipe(rate:number){
+        this.updatedGrade.emit(rate)
+    }
+
+    isStar(i){
+        console.log(i);
+        return i < this.grade
+    }
+}

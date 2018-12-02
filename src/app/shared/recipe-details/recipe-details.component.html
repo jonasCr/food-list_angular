@@ -22,9 +22,9 @@
         <p>
             {{recipe.description}}
         </p>
-        <p>
-            <!-- <i *ngFor="let grade of recipe.grade | numberToArray" class="fas fa-star"></i> -->
-        </p>
+        <span class="grade">
+            <app-rate [grade]="recipe.grade" (updatedGrade)="updateGrade($event)"></app-rate>    
+        </span>
 
         <mat-list>
             <mat-list-item *ngFor="let ingredient of recipe.ingredientsList">
