@@ -46,7 +46,6 @@ export class RecipeEditComponent{
             if (this.idRecipe !== 'create'){
                 this._recipeData.getRecipe(this.idRecipe).subscribe((data:any)=> {
                     this.recipe = new Recipe(data);
-                    //console.log(data);
                     this._globalService.setTitle(this.recipe.name);
                 })
             }else {
@@ -66,12 +65,10 @@ export class RecipeEditComponent{
             
         })
 
-        console.log(this.recipe)
         
 
         this._ingredientData.getIngredient().subscribe(data => {
             this.allIngredients = data;
-            console.log(this.allIngredients);
             for(let i = 0; i<this.allIngredients.length; i++){
                 if (!this.categoryList.includes(this.allIngredients[i].category)){
                     this.categoryList.push(this.allIngredients[i].category);
@@ -104,7 +101,6 @@ export class RecipeEditComponent{
         }else {
             if (this.recipe.idRecipe){
                     this._recipeData.updateRecipe(this.recipe);
-                    console.log(this.recipe);
                     this._globalService.progress = false;
                     this.router.navigate(['/recipe'])
 
@@ -143,7 +139,6 @@ export class RecipeEditComponent{
 
     
     chooseCategory(ingredient:string):Observable<string>{
-        console.log(ingredient);
         const dialogRef = this.dialog.open(RecipeDialogCategory, {
             width: '250px',
             data: {ingredient: ingredient, categories: this.categoryList}
@@ -174,7 +169,6 @@ export class RecipeEditComponent{
         })
     
 
-        console.log(this.recipe);
 
     }
     deleteIngredient(i){

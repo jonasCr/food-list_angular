@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
     selector:'app-rate',
@@ -11,13 +11,8 @@ import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
     `
 })
 
-export class RateComponent implements OnInit{
+export class RateComponent{
     constructor(){
-        
-    }
-
-    ngOnInit(): void {
-        console.log(this.grade);
         
     }
 
@@ -29,7 +24,6 @@ export class RateComponent implements OnInit{
     }
 
     isStar(i){
-        console.log(i);
         return i < this.grade
     }
 }

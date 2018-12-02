@@ -19,10 +19,32 @@ export class MenuListService{
             public _db:AngularFirestore,
             public _menuData:MenuData
         ){
-        let query:query = this._menuData.getRangeDay()
+        let query:query = this.getRangeDay()
         this.createCalendar(query);
         this.listMenu = this._menuData.getMenusByQuery(query);
     }
+
+    getRangeDay(day:Date = new Date()):query{
+        let dateString:string = day.getFullYear()+'-'+(day.getMonth()+1)+'-'+day.getDate();
+        
+        let response:query = new query({
+            firstDay: new Date(dateString),
+            lastDay: new Date(dateString)
+        })
+
+        day.setHours(0,0,0,0);
+        let weekDay:number = day.getDay() != 0 ? day.getDay(): 7;
+        
+        //Se determina el primer dia de la semana restando el numero del dia al dia de hoy
+        response.firstDay.setHours(0,0,0,0);
+        response.firstDay.setDate(day.getDate() - weekDay+1)
+
+        //Se determina el ultimo dia de la semana
+        response.lastDay.setHours(0,0,0,0);
+        response.lastDay.setDate(day.getDate() + (7-weekDay))
+        return response;
+    }
+
 
     createCalendar(query:query){
         if (this.menuObs){
@@ -45,7 +67,7 @@ export class MenuListService{
 
     getPrevWeek(day:Date = new Date()):Date{
         day.setDate(day.getDate()-7);
-        let query:query = this._menuData.getRangeDay(day);
+        let query:query = this.getRangeDay(day);
         this.createCalendar(query);
         this.listMenu = this._menuData.getMenusByQuery(query);
 
@@ -55,7 +77,7 @@ export class MenuListService{
     getNextWeek(day:Date = new Date()):Date{
         //console.log(day)
         day.setDate(day.getDate()+7);
-        let query:query = this._menuData.getRangeDay(day);
+        let query:query = this.getRangeDay(day);
         this.createCalendar(query);
         this.listMenu = this._menuData.getMenusByQuery(query);
         return day;

@@ -20,9 +20,7 @@ export class RecipeComponent implements OnInit{
         
         this._recipeData.getRecipes().subscribe((data:any[])=> {
             this.recipes= data;
-            console.log(this.recipes);
             this._globalService.progress = false;
-            console.log(this._globalService.progress)
         })
         
     }

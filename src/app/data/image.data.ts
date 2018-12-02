@@ -15,13 +15,10 @@ export class ImageData {
         private _afs:AngularFirestore,
         private _fireStorage:AngularFireStorage
     ){
-        // this._fireStorage.ref(`${this.FOLDER_IMAGES}/custom-select.png`).getMetadata().subscribe(data => {
-        //     console.log(data);
-        // });
+        
     }
 
     uploadImage(file:File):Promise<Image>{
-        debugger;
         return new Promise(resolve => {
             let response:Image;
             
@@ -51,7 +48,7 @@ export class ImageData {
     }
 
     addImage(image:Image){
-        this.collection.add(image);
+        this.collection.add(image.getData());
     }
 
     getImages(){
@@ -65,7 +62,7 @@ export class ImageData {
     }
 
     updateImage(image:Image){
-        this.collection.doc(image.idImage).set(image);
+        this.collection.doc(image.idImage).set(image.getData());
     }
 
     deleteRecipe(image:Image){

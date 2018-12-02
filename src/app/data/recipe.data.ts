@@ -11,14 +11,8 @@ export class RecipeData {
     collection:AngularFirestoreCollection<Recipe> = this._afs.collection('recipe');
     constructor(private _afs:AngularFirestore){}
 
-    addRecipe(recipe:Recipe){
-        //const data = recipe.getData();
-        for (let i = 0; i < recipe.ingredientsList.length; i++){
-            recipe.ingredientsList[i] = Object.assign({}, recipe.ingredientsList[i])
-            console.log(recipe.ingredientsList[i])
-        }
-        recipe.image = Object.assign({}, recipe.image)
-        this.collection.add(Object.assign({}, recipe));
+    addRecipe(recipe:Recipe){        
+        this.collection.add(recipe.getData());
     }
 
     getRecipe(idRecipe:string){
@@ -42,13 +36,8 @@ export class RecipeData {
     }
 
     updateRecipe(recipe:Recipe){
-        //delete recipe.idRecipe;
-        for (let i = 0; i < recipe.ingredientsList.length; i++){
-            recipe.ingredientsList[i] = Object.assign({}, recipe.ingredientsList[i])
-            console.log(recipe.ingredientsList[i])
-        }
-        recipe.image = Object.assign({}, recipe.image)
-        this.collection.doc(recipe.idRecipe).set(Object.assign({}, recipe));
+        
+        this.collection.doc(recipe.idRecipe).set(recipe.getData());
     }
 
     deleteRecipe(recipe:Recipe){

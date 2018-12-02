@@ -47,7 +47,7 @@ export class ListComponent implements OnDestroy{
         ){
         this._globalService.setTitle('Food List');
         this._globalService.progress = true;
-        let query:query = this._menuData.getRangeDay()
+        let query:query = this._listService.getRangeDay()
         this.menuListObs = this._menuData.getMenusByQuery(query).subscribe((menus:Menu[])=> {
             this.menuList = [];
             this.elementData = [];

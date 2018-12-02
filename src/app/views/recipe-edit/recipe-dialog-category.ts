@@ -30,7 +30,6 @@ export class RecipeDialogCategory {
         @Inject(MAT_DIALOG_DATA) public data:{ingredient:string, categories:string[]},
         public dialogref:MatDialogRef<RecipeDialogCategory>
     ){
-        console.log(data.ingredient);
     }
 
     onNoClick(){

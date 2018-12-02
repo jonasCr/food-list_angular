@@ -26,7 +26,7 @@ export class IngredientData {
 
     addIngredient(ingredient:Item):Promise<Item>{
         return new Promise(resolve => {
-            this.collection.add(Object.assign({}, ingredient)).then((refDoc)=> {
+            this.collection.add(ingredient.getData()).then((refDoc)=> {
                 ingredient.idIngredient = refDoc.id;
                 resolve(ingredient)
             })
@@ -35,7 +35,7 @@ export class IngredientData {
     }
 
     updateIngredient(ingredient:Item){
-        this.collection.doc(ingredient.idIngredient).set(ingredient)
+        this.collection.doc(ingredient.idIngredient).set(ingredient.getData())
     }
 
     deleteIngredient(ingredient:Item){
