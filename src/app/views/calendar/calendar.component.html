@@ -1,106 +1,33 @@
 <div class="com-calendar">
     <div>
-        <button mat-icon-button>
+        <button (click)="getPrevWeek()" mat-icon-button>
            <mat-icon>keyboard_arrow_left</mat-icon>
        </button>
-        <button mat-icon-button>
+        <button (click)="getNextWeek()" mat-icon-button>
             <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
     </div>
-    <div class="com-calendar__day" *ngFor="let menu of menus">
-        <h2> {{menu.weekday | weekday}}</h2>
+    <mat-card class="com-calendar__day" *ngFor="let menu of menus; let iMenu = index">
+        <h2> {{menu.weekday | weekday}} {{menu.day | date}}</h2>
 
-        <div>
-            <span class="bold">Comida</span>
-            <div *ngIf="menu.lunch" class="com-calendar__meal">
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            title
-                        </mat-panel-title>
-
-                    </mat-expansion-panel-header>
-                    <mat-card class="example-card">
-                        <mat-card-header>
-                            <div mat-card-avatar class="example-header-image"></div>
-                            <mat-card-title>Shiba Inu</mat-card-title>
-                            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                        </mat-card-header>
-                        <img mat-card-image src="https://firebasestorage.googleapis.com/v0/b/patata-ac960.appspot.com/o/plato.jpg?alt=media&token=9d33d872-702a-4ab8-a837-cbc5ff357d88" alt="Photo of a Shiba Inu">
-                        <mat-card-content>
-                            <p>
-
-                            </p>
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button mat-button>LIKE</button>
-                            <button mat-button>SHARE</button>
-                        </mat-card-actions>
-                    </mat-card>
-                </mat-expansion-panel>
-            </div>
-            <div class="row" *ngIf="!menu.lunch">
-                <div class="col-8">
+        <div *ngFor="let meal of menu.meals;let iMeal = index">
+            <span class="bold">{{meal.meal}}</span>
+            <div class="row">
+                <div class="col" *ngIf="meal.name">
+                    <app-recipe-details (deleteBtn)="deleteRecipeFromMenu(iMeal, iMenu)" [parent]="'calendar'" [recipe]="meal"></app-recipe-details>
+                </div>
+                <div class="col" *ngIf="!meal.name">
                     <mat-form-field>
-                        <mat-select (selectionChange)="onChange($event, menu, 'lunch')" placeholder="Elige una receta">
+                        <mat-select (selectionChange)="onChange($event, iMenu, iMeal)" placeholder="Elige una receta">
                             <mat-option #selectRecipe *ngFor="let recipe of recipes; let i = index" [value]="i">
                                 {{recipe.name}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div class="col-4">
-                    <button [disabled]="!selectedRecipes[menu.weekday]?.lunch" (click)="saveMenu(menu, 'lunch')" mat-raised-button color="primary">Guardar</button>
-                </div>
-
-
-            </div>
-        </div>
-        <div>
-            <span class="bold">Cena</span>
-            <div *ngIf="menu.dinner" class="com-calendar__meal">
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            title
-                        </mat-panel-title>
-
-                    </mat-expansion-panel-header>
-                    <mat-card class="example-card">
-                        <mat-card-header>
-                            <div mat-card-avatar class="example-header-image"></div>
-                            <mat-card-title>Shiba Inu</mat-card-title>
-                            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                        </mat-card-header>
-                        <img mat-card-image src="https://firebasestorage.googleapis.com/v0/b/patata-ac960.appspot.com/o/plato.jpg?alt=media&token=9d33d872-702a-4ab8-a837-cbc5ff357d88" alt="Photo of a Shiba Inu">
-                        <mat-card-content>
-                            <p>
-
-                            </p>
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button mat-button>LIKE</button>
-                            <button mat-button>SHARE</button>
-                        </mat-card-actions>
-                    </mat-card>
-                </mat-expansion-panel>
-            </div>
-            <div class="row" *ngIf="!menu.dinner">
-                <div class="col-8">
-                    <mat-form-field>
-                        <mat-select (selectionChange)="onChange($event, menu, 'lunch')" placeholder="Elige una receta">
-                            <mat-option #selectRecipe *ngFor="let recipe of recipes; let i = index" [value]="i">
-                                {{recipe.name}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="col-4">
-                    <button [disabled]="!selectedRecipes[menu.weekday]?.lunch" (click)="saveMenu(menu, 'lunch')" mat-raised-button color="primary">Guardar</button>
-                </div>
             </div>
 
         </div>
 
-    </div>
+    </mat-card>
 </div>

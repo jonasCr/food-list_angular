@@ -1,10 +1,13 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { GlobalService } from "src/app/services/global.service";
-import { menu } from "src/app/models/menu.model";
-import { MenuListService } from "src/app/services/list-menu.service";
-import { DataService } from "src/app/services/data.service";
-import { recipe } from "src/app/models/recipe.model";
+import { Menu, ParamsMenu } from "src/app/shared/models/menu.model";
+import { MenuListService } from "./list-menu.service";
+import { Recipe, ParamsRecipe } from "src/app/shared/models/recipe.model";
 import { Subscription } from "rxjs";
+import { MenuData } from "src/app/data/menu.data";
+import { RecipeData } from "src/app/data/recipe.data";
+import { NotificationService } from "src/app/services/notificacion.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector:'app-calendar',
@@ -13,31 +16,46 @@ import { Subscription } from "rxjs";
 })
 
 export class CalendarComponent implements OnDestroy{
-    menus:menu[];
-    firstDay:Date;
-    lastDay:Date;
-    recipes:recipe[];
-    selectedRecipes:{lunch?:recipe, dinner?:recipe}[] = [];
+    menus:Menu[] = [];
+    recipes:Recipe[] = [];
+    selectedRecipes:Recipe[] = [];
     menuListObs:Subscription;
     recipesObs:Subscription;
-
-    
-    today:number= new Date().getDay();
-
+    dateBase:Date= new Date();
     constructor(
+            private router:Router,
+            private _notif:NotificationService,
             private _globalService:GlobalService,
             public  _menuList:MenuListService,
-            public _dataService:DataService
+            public _menuData:MenuData,
+            public _recipeDate:RecipeData
         ){
         this._globalService.setTitle('Calendar');
-        this.menuListObs = this._menuList.listMenu.subscribe((menu:menu[])=> {
-            this.menus = menu;
-            console.log(this.menus);
+        this._globalService.progress = true;
+        this.recipesObs = this._recipeDate.getRecipes().subscribe((recipes:any[])=> {
+            this.recipes = [];
+
+            for (let recipe of recipes){
+                this.recipes.push(new Recipe(recipe));
+            }
+            if (this.recipes.length == 0){
+                this._notif.showMessage('Tienes que crear recetas antes de poder usar la app');
+                this.router.navigate(['/recipe/create'])
+            }
+            
+        });
+        this.menuListObs = this._menuList.listMenu.subscribe((menu:Menu[])=> {
+            this.menus = [];
+            for (let menuItem of menu){
+                
+                // menuItem.day = menuItem.day.toDate();
+                this.menus.push(new Menu(menuItem))
+            }
+
+            //this.menus = menu;
         })
-        this.recipesObs = this._dataService.getRecipes().subscribe((recipes:any[])=> {
-            this.recipes = recipes;
-            console.log(this.recipes)
-        })
+        
+        this._globalService.progress= false
     }
 
     ngOnDestroy(){
@@ -45,28 +63,48 @@ export class CalendarComponent implements OnDestroy{
         this.recipesObs.unsubscribe();
     }
 
-    onChange(select, menu:menu, meal:string){
-        //console.log(select.value);
-        console.log(menu);
-        console.log(this.recipes[select.value]);
-        if (meal == 'lunch'){
-            this.selectedRecipes[menu.weekday] = {lunch:this.recipes[select.value]}
-        }else if (meal == 'dinner') {
-            this.selectedRecipes[menu.weekday].dinner = this.recipes[select.value];
-        }
-        
-        console.log(this.selectedRecipes);    
+    onChange(recipe, iMenu, iMeal){  
+       let params:ParamsRecipe = this.recipes[recipe.value];
+       params.idMeal = this.menus[iMenu].meals[iMeal].idMeal;
+       this.menus[iMenu].meals[iMeal] = new Recipe(params);
+       this._menuData.updateMenu(this.menus[iMenu]).then(()=> {
+
+       })
     }
 
-    saveMenu(menu:menu, meal:string){
-        if (meal =='lunch'){
-            menu.lunch = this.selectedRecipes[menu.weekday].lunch;
-            
-        } else if (meal =='dinner'){
-            menu.lunch = this.selectedRecipes[menu.weekday].lunch;
-        }
-        this._dataService.updateMenu(menu)
-        console.log(menu);
-        
+    getPrevWeek(){
+        this._globalService.progress = true;
+        this.menus= [];
+
+        this.menuListObs.unsubscribe();
+        this.dateBase = this._menuList.getPrevWeek(this.dateBase);
+        this.menuListObs = this._menuList.listMenu.subscribe((menu:Menu[])=> {
+            for (let menuItem of menu){
+                
+                this.menus.push(new Menu(menuItem))
+                this._globalService.progress = false;
+            }
+        })
+
+    }
+
+    getNextWeek(){
+        this._globalService.progress = true;
+        this.menus= [];
+        this.menuListObs.unsubscribe();
+        this.dateBase = this._menuList.getNextWeek(this.dateBase);
+        this.menuListObs = this._menuList.listMenu.subscribe((menu:Menu[])=> {
+            for (let menuItem of menu){
+                
+                this.menus.push(new Menu(menuItem))
+            }
+            this._globalService.progress = false;
+        })
+    }
+
+    deleteRecipeFromMenu(meal:number, menu:number){
+        let idMeal = this.menus[menu].meals[meal].idMeal
+        this.menus[menu].meals[meal] = new Recipe({idMeal: idMeal});
+        this._menuData.updateMenu(this.menus[menu]);
     }
 }

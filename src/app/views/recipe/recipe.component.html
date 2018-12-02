@@ -1,1 +1,12 @@
-<p>recipe</p>
+<div class="animated fadeIn" *ngIf="recipes">
+    <app-recipe-details *ngFor="let recipe of recipes" [recipe]="recipe" [parent]="'recipe'"></app-recipe-details>
+
+</div>
+<div *ngIf="recipes.length == 0 && !_globalService.progress">
+
+    Ups.. No tienes recetas guardadas todavia. Pulsa el boton + para añadir tu primera recetta
+
+</div>
+<a [routerLink]="[ '/recipe/create']" class="fab-link" color="primary" mat-fab>
+    <mat-icon>add</mat-icon>
+</a>

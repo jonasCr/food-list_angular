@@ -1,9 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { GlobalService } from "src/app/services/global.service";
-import { AngularFirestore } from "@angular/fire/firestore";
-import { recipe } from "src/app/models/recipe.model";
-import { DataService } from "src/app/services/data.service";
-import { menu } from "src/app/models/menu.model";
+import { Recipe } from "src/app/shared/models/recipe.model";
+import { RecipeData } from "src/app/data/recipe.data";
 
 @Component({
     selector:'app-recipe',
@@ -12,28 +10,27 @@ import { menu } from "src/app/models/menu.model";
 })
 
 export class RecipeComponent implements OnInit{
-    recipe:recipe[];
+    recipes:Recipe[] = [];
     constructor(
         private _globalService:GlobalService,
-        private _dataService:DataService,
-        private _db:AngularFirestore    
+        private _recipeData:RecipeData
     ){
         this._globalService.setTitle('Recipe');
+        this._globalService.progress = true
         
-        this._dataService.getRecipes().subscribe((data:any[])=> {
-            this.recipe = data;
-            console.log(this.recipe);
+        this._recipeData.getRecipes().subscribe((data:any[])=> {
+            this.recipes= data;
+            console.log(this.recipes);
+            this._globalService.progress = false;
+            console.log(this._globalService.progress)
         })
-
-        //this.addMenu();
         
     }
 
 
     ngOnInit(){}
 
-    addMenu(recipe:recipe){
-        
-        this._dataService.addRecipe(recipe);
+    addMenu(recipe:Recipe){
+        this._recipeData.addRecipe(recipe);
     }
 }

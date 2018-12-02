@@ -1,0 +1,36 @@
+<mat-expansion-panel class="animated fadeIn" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+        <mat-panel-title *ngIf="!panelOpenState">
+            {{recipe.name}}
+        </mat-panel-title>
+        <mat-panel-description class="com_panel_align-end">
+            <button *ngIf="parent == 'calendar'" mat-icon-button>
+                <mat-icon (click)="deleteRecipeFromMenu()">delete</mat-icon>
+            </button>
+            <button [routerLink]="[ '/recipe', recipe.idRecipe ]" *ngIf="parent == 'recipe'" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+            </button>
+
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-card-header>
+        <mat-card-title>{{recipe.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="recipe.image.url" [alt]="recipe.name">
+    <mat-card-content>
+        <p>
+            {{recipe.description}}
+        </p>
+        <p>
+            <!-- <i *ngFor="let grade of recipe.grade | numberToArray" class="fas fa-star"></i> -->
+        </p>
+
+        <mat-list>
+            <mat-list-item *ngFor="let ingredient of recipe.ingredientsList">
+                <mat-checkbox *ngIf="parent === 'calendar'" (change)="onChange($event)" [(ngModel)]="ingredient.terminate">{{ingredient.name}}</mat-checkbox>
+                <span *ngIf="parent === 'recipe'">{{ingredient.name}}</span>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-expansion-panel>

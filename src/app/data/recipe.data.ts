@@ -1,0 +1,58 @@
+import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Recipe } from '../shared/models/recipe.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+@Injectable({
+    providedIn: 'root',
+})
+export class RecipeData {
+    collection:AngularFirestoreCollection<Recipe> = this._afs.collection('recipe');
+    constructor(private _afs:AngularFirestore){}
+
+    addRecipe(recipe:Recipe){
+        //const data = recipe.getData();
+        for (let i = 0; i < recipe.ingredientsList.length; i++){
+            recipe.ingredientsList[i] = Object.assign({}, recipe.ingredientsList[i])
+            console.log(recipe.ingredientsList[i])
+        }
+        recipe.image = Object.assign({}, recipe.image)
+        this.collection.add(Object.assign({}, recipe));
+    }
+
+    getRecipe(idRecipe:string){
+        return this.collection.doc(idRecipe).snapshotChanges().pipe(
+            map(recipe =>  {
+                const data = recipe.payload.data();
+                const idRecipe = recipe.payload.id;
+                return {idRecipe, ...data}
+            })
+        );
+    }
+
+    getRecipes(){
+       return this.collection.snapshotChanges().pipe(
+           map(recipes => recipes.map( a =>{
+               const data = a.payload.doc.data();
+               const idRecipe = a.payload.doc.id;
+               return {idRecipe, ...data}
+           }))
+       ); 
+    }
+
+    updateRecipe(recipe:Recipe){
+        //delete recipe.idRecipe;
+        for (let i = 0; i < recipe.ingredientsList.length; i++){
+            recipe.ingredientsList[i] = Object.assign({}, recipe.ingredientsList[i])
+            console.log(recipe.ingredientsList[i])
+        }
+        recipe.image = Object.assign({}, recipe.image)
+        this.collection.doc(recipe.idRecipe).set(Object.assign({}, recipe));
+    }
+
+    deleteRecipe(recipe:Recipe){
+        this.collection.doc(recipe.idRecipe).delete();
+    }
+    
+}

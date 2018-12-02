@@ -8,6 +8,5 @@ import { GlobalService } from './services/global.service';
 })
 export class AppComponent {
   constructor(public  _globalService:GlobalService){
-    
   }
 }

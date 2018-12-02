@@ -4,13 +4,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class GlobalService {
-    
+    progress:boolean = false;
     title:string= "Hola"
     constructor(){
-        //console.log('global')
     }
 
     setTitle(title:string):void{
         this.title = title;
     }
+
+    setProgress(value:boolean){
+        this.progress = value;
+    }
+
+
 }

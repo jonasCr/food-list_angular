@@ -1,21 +1,53 @@
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700');
-body {
-    margin: 0;
-    background-color: #fafafa;
-    font-family: 'Roboto', sans-serif;
-}
-
-* {
-    box-sizing: border-box
-}
-
-.main-title h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold
-}
-
-.main-container {
-    margin: 1em;
-    margin-bottom: 68px;
-}
+    @import '@angular/material/prebuilt-themes/indigo-pink.css';
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700');
+    body {
+        margin: 0;
+        background-color: #fafafa;
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    * {
+        box-sizing: border-box
+    }
+    
+    .main-title h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold
+    }
+    
+    .main-container {
+        margin: 1em;
+        margin-bottom: 80px;
+    }
+    
+    .flex-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .flex-center {
+        display: flex;
+        justify-content: center;
+    }
+    
+    button.mat-raised-button {
+        margin: 0.2em
+    }
+    
+    a.fab-link {
+        z-index: 999;
+        position: fixed;
+        bottom: 90px;
+        right: 25px;
+    }
+    
+    mat-progress-bar.mat-progress-bar {
+        position: fixed;
+        bottom: 0;
+    }
+    
+    .body.loading {
+        opacity: 0.7;
+        cursor: wait;
+    }

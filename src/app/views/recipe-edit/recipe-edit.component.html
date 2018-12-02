@@ -1,0 +1,65 @@
+<form class="animated fadeIn" *ngIf="recipe" novalidate>
+    <mat-form-field>
+        <input [disabled]="_globalService.progress" [(ngModel)]="recipe.name" name="name" matInput placeholder="Name">
+    </mat-form-field>
+
+    <mat-form-field>
+        <textarea [disabled]="_globalService.progress" [(ngModel)]="recipe.description" name="description" rows="5" matInput placeholder="Description"></textarea>
+    </mat-form-field>
+
+
+    <label for="fileInput" class="row">
+        <div class="col-10">
+            <mat-form-field>
+                <input disabled [(ngModel)]="recipe.image.name" name="imageName" matInput placeholder="Elige una foto" type="text">
+            </mat-form-field>
+        </div>
+        <div class="col-2 flex-center">
+            <div>
+                <i class="fas fa-camera fa-lg"></i>
+                <input [disabled]="_globalService.progress" (change)="onChangeFile($event)" type="file" name="fileInput" id="fileInput" style="display: none;" />
+            </div>
+        </div>
+        <div *ngIf="recipe.image.url" class="col-12">
+            <img [src]="recipe.image.url" alt="recipe.image.name" class="img-fluid img-thumbnail">
+        </div>
+    </label>
+
+
+    <p>Ingredients</p>
+    <ul>
+        <li *ngFor="let ingredient of recipe.ingredientsList; let i = index">
+            <span>{{ingredient.name}}</span>
+            <small>
+                <i class="fas fa-tags"></i>
+                {{ingredient.category}}
+            </small>
+        </li>
+        <mat-form-field>
+
+            <input [(ngModel)]="itemToAdd" [disabled]="_globalService.progress" (keydown.enter)="pressEnter($event,ingredient)" [matAutocomplete]="autoIngredient" [name]="'ingredient_'+i" matInput type="text">
+            <button tabindex="-1" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="deleteIngredient(i)">
+                <mat-icon>close</mat-icon>
+            </button>
+            <mat-autocomplete #autoIngredient>
+                <mat-option (onSelectionChange)="selected($event, ingredient)" class="flex-between" *ngFor="let ingredient of allIngredients; let itemI = index">
+                    <span>{{ingredient.name}}</span>
+                    <small>
+                            <i class="fas fa-tags"></i>
+                            {{ingredient.category}}
+                        </small>
+                </mat-option>
+
+            </mat-autocomplete>
+
+
+        </mat-form-field>
+
+    </ul>
+
+    <div class="flex-end">
+        <button [disabled]="_globalService.progress" type="button" (click)="cancel()" mat-raised-button color="warn">Cancelar</button>
+        <button [disabled]="_globalService.progress" type="button" (click)="saveChange()" mat-raised-button color="primary">Guardar</button>
+    </div>
+
+</form>

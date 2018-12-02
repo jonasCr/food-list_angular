@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 
@@ -17,12 +17,19 @@ import { FirebaseModule } from './firebase.module';
 
 //Pipes
 import { WeekdayPipe } from './pipes/weekday.pipe';
+import { NumberToArray } from './pipes/number-to-array.pipe';
+import localEs from '@angular/common/locales/es'
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localEs);
 
 //Component
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { CalendarComponent } from './views/calendar/calendar.component';
-import { ListComponent } from './views/list/list.component';
+import { ListComponent } from './views/calendar/list/list.component';
 import { RecipeComponent } from './views/recipe/recipe.component';
+import { RecipeDetails } from './shared/recipe-details/recipe-details.component';
+import { RecipeEditComponent } from './views/recipe-edit/recipe-edit.component';
+import { RecipeDialogCategory } from './views/recipe-edit/recipe-dialog-category';
 
 
 
@@ -34,7 +41,14 @@ import { RecipeComponent } from './views/recipe/recipe.component';
     CalendarComponent,
     ListComponent,
     RecipeComponent,
-    WeekdayPipe
+    WeekdayPipe,
+    RecipeDetails,
+    NumberToArray,
+    RecipeEditComponent,
+    RecipeDialogCategory
+  ],
+  entryComponents: [
+    RecipeDialogCategory
   ],
   imports: [
     BrowserModule,
@@ -42,7 +56,8 @@ import { RecipeComponent } from './views/recipe/recipe.component';
     MaterialModule,
     FirebaseModule,
     FormsModule,
-    APP_ROUTES
+    APP_ROUTES,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' }
