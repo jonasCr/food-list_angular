@@ -1,16 +1,11 @@
-<div (click)="_globalService.progress? false: true" class="body" [ngClass]="{'loading': _globalService.progress}">
-    <mat-toolbar color="primary" class="main-title">
-        <mat-toolbar-row>
-            <h1>{{_globalService.title}}</h1>
-        </mat-toolbar-row>
-
-    </mat-toolbar>
+<div class="body" [ngClass]="{'loading': _globalService.progress}">
+    <app-navbar></app-navbar>
 
     <div class="animated fadeIn" class="main-container">
         <router-outlet></router-outlet>
     </div>
 
-    <app-navbar></app-navbar>
+
 </div>
 
 <mat-progress-bar *ngIf="_globalService.progress" mode="indeterminate"></mat-progress-bar>

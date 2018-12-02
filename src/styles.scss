@@ -6,6 +6,10 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+button:focus {
+    outline: none;
+}
+
 * {
     box-sizing: border-box
 }
@@ -17,7 +21,7 @@ body {
 
 .main-container {
     margin: 1em;
-    margin-bottom: 80px;
+    margin-top: 55px;
 }
 
 .flex-center {

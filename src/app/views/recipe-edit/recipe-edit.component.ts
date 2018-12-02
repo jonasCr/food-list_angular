@@ -105,7 +105,9 @@ export class RecipeEditComponent{
             if (this.recipe.idRecipe){
                     this._recipeData.updateRecipe(this.recipe);
                     console.log(this.recipe);
-                    this._globalService.progress = false
+                    this._globalService.progress = false;
+                    this.router.navigate(['/recipe'])
+
                 }else {
                     delete this.recipe.idRecipe
                     this._recipeData.addRecipe(this.recipe);
