@@ -36,7 +36,6 @@ export class RecipeData {
     }
 
     updateRecipe(recipe:Recipe){
-        
         this.collection.doc(recipe.idRecipe).set(recipe.getData());
     }
 

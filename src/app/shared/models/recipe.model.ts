@@ -57,6 +57,7 @@ export class Recipe implements ParamsRecipe {
                 response.ingredientsList[i] = response.ingredientsList[i].getData();
             }
         }
+        response.image = response.image.getData();
         
         return response;
     }
