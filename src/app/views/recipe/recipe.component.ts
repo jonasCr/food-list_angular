@@ -18,8 +18,11 @@ export class RecipeComponent implements OnInit{
         this._globalService.setTitle('Recipe');
         this._globalService.progress = true
         
-        this._recipeData.getRecipes().subscribe((data:any[])=> {
-            this.recipes= data;
+        this._recipeData.getRecipes().subscribe((data:Recipe[])=> {
+            for (let recipe of data){
+                this.recipes.push(new Recipe(recipe))
+            }
+            //this.recipes= data;
             this._globalService.progress = false;
         })
         

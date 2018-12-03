@@ -12,6 +12,7 @@ export class RecipeDetails {
     @Input() recipe:Recipe;
     @Input() parent:string;
     @Output() deleteBtn:EventEmitter<boolean> = new EventEmitter;
+    @Output() checkList:EventEmitter<Recipe> = new EventEmitter;
     constructor(
             public _recipeData:RecipeData,
         ){}
@@ -23,7 +24,7 @@ export class RecipeDetails {
     }
 
     onChange(event){
-        this._recipeData.updateRecipe(this.recipe);
+        this.checkList.emit(this.recipe);
     }
 
     updateGrade(grade:number){

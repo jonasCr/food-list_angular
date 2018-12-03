@@ -64,12 +64,23 @@ export class CalendarComponent implements OnDestroy{
     }
 
     onChange(recipe, iMenu, iMeal){  
-       let params:ParamsRecipe = this.recipes[recipe.value];
-       params.idMeal = this.menus[iMenu].meals[iMeal].idMeal;
-       this.menus[iMenu].meals[iMeal] = new Recipe(params);
-       this._menuData.updateMenu(this.menus[iMenu]).then(()=> {
+        this._globalService.progress = true
+        let params:ParamsRecipe = this.recipes[recipe.value];
+        params.idMeal = this.menus[iMenu].meals[iMeal].idMeal;
+        this.menus[iMenu].meals[iMeal] = new Recipe(params);
+        this._menuData.updateMenu(this.menus[iMenu]).then(()=> {
+            this._globalService.progress= false
+        })
+    }
 
-       })
+    updateRecipe(event:ParamsRecipe, iMenu:number, iMeal:number){
+        this._globalService.progress = true;
+        event.idMeal = this.menus[iMenu].meals[iMeal].idMeal
+        this.menus[iMenu].meals[iMeal] = new Recipe(event);
+        this._menuData.updateMenu(this.menus[iMenu]).then(()=> {
+            this._globalService.progress= false
+        })
+
     }
 
     getPrevWeek(){

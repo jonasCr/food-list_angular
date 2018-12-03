@@ -14,7 +14,7 @@
             <span class="bold">{{meal.meal}}</span>
             <div class="row">
                 <div class="col" *ngIf="meal.name">
-                    <app-recipe-details (deleteBtn)="deleteRecipeFromMenu(iMeal, iMenu)" [parent]="'calendar'" [recipe]="meal"></app-recipe-details>
+                    <app-recipe-details (checkList)="updateRecipe($event, iMenu, iMeal)" (deleteBtn)="deleteRecipeFromMenu(iMeal, iMenu)" [parent]="'calendar'" [recipe]="meal"></app-recipe-details>
                 </div>
                 <div class="col" *ngIf="!meal.name">
                     <mat-form-field>

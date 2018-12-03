@@ -53,11 +53,13 @@ export class Recipe implements ParamsRecipe {
     getData(){
         let response = Object.assign({}, this);
         if(response.ingredientsList){
-            for (let i in response.ingredientsList){
+            for (let i = 0; i < response.ingredientsList.length; i++){
                 response.ingredientsList[i] = response.ingredientsList[i].getData();
             }
         }
-        response.image = response.image.getData();
+        if(response.image != undefined){
+            response.image = response.image.getData();
+        }
         
         return response;
     }

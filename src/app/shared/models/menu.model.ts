@@ -56,9 +56,6 @@ export class Menu implements ParamsMenu {
         if(response.meals != undefined){
             for (let i = 0; i<response.meals.length;i++){
                 response.meals[i] = response.meals[i].getData();
-                if(response.meals[i].image != undefined){
-                    response.meals[i].image = response.meals[i].image.getData();
-                }
             }
         }
         

@@ -25,7 +25,7 @@ export class RecipeData {
         );
     }
 
-    getRecipes(){
+    getRecipes():any{
        return this.collection.snapshotChanges().pipe(
            map(recipes => recipes.map( a =>{
                const data = a.payload.doc.data();
