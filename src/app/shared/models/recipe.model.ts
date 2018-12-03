@@ -40,8 +40,8 @@ export class Recipe implements ParamsRecipe {
         }
         if (params.ingredientsList != undefined){
             this.ingredientsList = [];
-            for (let ingredient of params.ingredientsList){
-                this.ingredientsList.push(new Item(ingredient));
+            for (let i = 0; i < params.ingredientsList.length; i++){
+                this.ingredientsList.push(new Item(params.ingredientsList[i]));
             }
         }
         if (params.idRecipe != undefined){
