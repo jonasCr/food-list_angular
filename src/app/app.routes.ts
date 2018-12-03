@@ -13,4 +13,4 @@ const ROUTES:Routes = [
     {path: '**', pathMatch: 'full', redirectTo: 'calendar'},
 ];
 
-export const APP_ROUTES = RouterModule.forRoot(ROUTES,{useHash:true});
+export const APP_ROUTES = RouterModule.forRoot(ROUTES);
