@@ -5,17 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalService {
     progress:boolean = false;
-    title:string= "Hola"
+    title:string;
+    logged:boolean;
     constructor(){
     }
 
     setTitle(title:string):void{
         this.title = title;
     }
-
-    setProgress(value:boolean){
-        this.progress = value;
-    }
-
 
 }
