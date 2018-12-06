@@ -12,7 +12,7 @@ export class UserComponent {
         public afAuth:AngularFireAuth,
         public authService:AuthService
         ){
-            this.login();
+            this.signUp();
 
     }
 

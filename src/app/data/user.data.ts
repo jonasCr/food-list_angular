@@ -25,7 +25,7 @@ export class UserData {
     setUser(user:User){
         let idUser = user.userId;
         delete user.userId
-        this.collection.doc(idUser).set(user.getData());
+        return this.collection.doc(idUser).set(user.getData());
     }
 
 }
