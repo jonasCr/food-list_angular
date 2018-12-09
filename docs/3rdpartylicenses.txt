@@ -402,12 +402,12 @@ MIT
 
 @angular/material/snack-bar
 
-@angular/router
+@angular/forms
 MIT
 
-@angular/material/icon
+@angular/material/datepicker
 
-@angular/forms
+@angular/router
 MIT
 
 @angular/material/checkbox
@@ -436,6 +436,8 @@ firebase/firestore
 
 @angular/material/table
 
+@angular/material/icon
+
 @angular/material/autocomplete
 
 @angular/fire/storage
@@ -445,12 +447,6 @@ MIT
 Apache-2.0
 
 firebase/storage
-
-@angular/material/progress-bar
-
-@angular/material/toolbar
-
-@angular/material/menu
 
 @angular/fire/auth
 MIT
@@ -662,6 +658,12 @@ Apache-2.0
 
 
 firebase/auth
+
+@angular/material/progress-bar
+
+@angular/material/toolbar
+
+@angular/material/menu
 
 zone.js
 MIT
