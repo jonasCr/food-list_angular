@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from "@angular/core";
 import { GlobalService } from "src/app/services/global.service";
-import { Menu, ParamsMenu } from "src/app/shared/models/menu.model";
+import { Menu } from "src/app/shared/models/menu.model";
 import { MenuListService } from "./list-menu.service";
 import { Recipe, ParamsRecipe } from "src/app/shared/models/recipe.model";
 import { Subscription } from "rxjs";
@@ -8,6 +8,7 @@ import { MenuData } from "src/app/data/menu.data";
 import { RecipeData } from "src/app/data/recipe.data";
 import { NotificationService } from "src/app/services/notificacion.service";
 import { Router } from "@angular/router";
+import { query } from "../../shared/models/query.model";
 
 @Component({
     selector:'app-calendar',
@@ -22,6 +23,8 @@ export class CalendarComponent implements OnDestroy{
     menuListObs:Subscription;
     recipesObs:Subscription;
     dateBase:Date= new Date();
+    firstDay:Date;
+    lastDay:Date;
     constructor(
             private router:Router,
             private _notif:NotificationService,
@@ -44,16 +47,6 @@ export class CalendarComponent implements OnDestroy{
             }
             
         });
-        this.menuListObs = this._menuList.listMenu.subscribe((menu:Menu[])=> {
-            this.menus = [];
-            for (let menuItem of menu){
-                
-                // menuItem.day = menuItem.day.toDate();
-                this.menus.push(new Menu(menuItem))
-            }
-
-            //this.menus = menu;
-        })
         
         this._globalService.progress= false
     }
@@ -80,37 +73,8 @@ export class CalendarComponent implements OnDestroy{
         this._menuData.updateMenu(this.menus[iMenu]).then(()=> {
             this._globalService.progress= false
         })
+        
 
-    }
-
-    getPrevWeek(){
-        this._globalService.progress = true;
-        this.menus= [];
-
-        this.menuListObs.unsubscribe();
-        this.dateBase = this._menuList.getPrevWeek(this.dateBase);
-        this.menuListObs = this._menuList.listMenu.subscribe((menu:Menu[])=> {
-            for (let menuItem of menu){
-                
-                this.menus.push(new Menu(menuItem))
-                this._globalService.progress = false;
-            }
-        })
-
-    }
-
-    getNextWeek(){
-        this._globalService.progress = true;
-        this.menus= [];
-        this.menuListObs.unsubscribe();
-        this.dateBase = this._menuList.getNextWeek(this.dateBase);
-        this.menuListObs = this._menuList.listMenu.subscribe((menu:Menu[])=> {
-            for (let menuItem of menu){
-                
-                this.menus.push(new Menu(menuItem))
-            }
-            this._globalService.progress = false;
-        })
     }
 
     deleteRecipeFromMenu(meal:number, menu:number){
@@ -118,4 +82,24 @@ export class CalendarComponent implements OnDestroy{
         this.menus[menu].meals[meal] = new Recipe({idMeal: idMeal});
         this._menuData.updateMenu(this.menus[menu]);
     }
+
+    getMenus(event:query){
+        //this._globalService.progress = true;
+        if (this.menuListObs){
+            this.menuListObs.unsubscribe;
+        }
+        this._globalService.progress = true;
+        this._menuList.createCalendar(event);
+        this.menuListObs = this._menuData.getMenusByQuery(event).subscribe((menus:Menu[])=> {
+            this.menus = [];
+            for (let i = 0; i < menus.length; i++){
+                this.menus.push(new Menu(menus[i]));
+            }
+            
+        })
+        this._globalService.progress = false;
+        
+    }
+
+
 }

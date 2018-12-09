@@ -1,8 +1,9 @@
+<app-range-day (query)="getMenus($event)"></app-range-day>
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
     <!-- Position Column -->
     <ng-container matColumnDef="check">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <i class="far fa-check-circle"></i> </th>
         <td mat-cell *matCellDef="let element">
             <mat-checkbox (change)="onCheck($event, element.indexes)" [(ngModel)]="element.check"></mat-checkbox>
         </td>
@@ -10,19 +11,19 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> category </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
         <td mat-cell *matCellDef="let element"> {{element.category}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="meal">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> meal </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Receta </th>
         <td mat-cell *matCellDef="let element"> {{element.meal}} </td>
     </ng-container>
 

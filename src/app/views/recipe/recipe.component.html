@@ -2,7 +2,7 @@
     <app-recipe-details *ngFor="let recipe of recipes" [recipe]="recipe" [parent]="'recipe'"></app-recipe-details>
 
 </div>
-<div *ngIf="recipes.length == 0 && !_globalService.progress">
+<div *ngIf="!recipes && !_globalService.progress">
 
     Ups.. No tienes recetas guardadas todavia. Pulsa el boton + para añadir tu primera recetta
 

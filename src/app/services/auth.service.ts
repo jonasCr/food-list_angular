@@ -63,7 +63,7 @@ export class AuthService {
     }
 
     createGroup(user:User){
-        
+
         let userList = []
         userList.push(user);
         let params:ParamsGroup = {
@@ -74,4 +74,7 @@ export class AuthService {
         
         this.groupData.setGroup(new Group(params));
     }
+    
+
+    
 }

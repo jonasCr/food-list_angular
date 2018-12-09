@@ -1,6 +1,11 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { Recipe } from "src/app/shared/models/recipe.model";
 import { RecipeData } from "src/app/data/recipe.data";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { ConfirmComponent } from "../components/confirm-dialog/confirm-dialog.component";
+import { NotificationService } from "src/app/services/notificacion.service";
+import { Router } from "@angular/router";
+
 
 @Component({
     selector:'app-recipe-details',
@@ -15,13 +20,10 @@ export class RecipeDetails {
     @Output() checkList:EventEmitter<Recipe> = new EventEmitter;
     constructor(
             public _recipeData:RecipeData,
+            public dialog: MatDialog,
+            private _notif:NotificationService,
+            private router:Router
         ){}
-
-
-
-    deleteRecipeFromMenu(){
-        this.deleteBtn.emit(true);
-    }
 
     onChange(event){
         this.checkList.emit(this.recipe);
@@ -34,6 +36,27 @@ export class RecipeDetails {
 
     isStar(i){
         return i<= this.recipe.grade;
+    }
+
+    confirm(){
+        if (this.parent == 'recipe'){
+            const dialogRef = this.dialog.open(ConfirmComponent, {
+                width: '250px',
+                data: `borrar la receta ${this.recipe.name}`
+            });
+    
+            dialogRef.afterClosed().subscribe(data => {
+                if (data){
+                    this._recipeData.deleteRecipe(this.recipe).then(()=> {
+                        this._notif.showMessage('Receta suprimida...');
+                        //this.router.navigate(['/recipe'])
+                    })
+                }
+            })
+        }else {
+            this.deleteBtn.emit(true);
+        }
+        
     }
 
    

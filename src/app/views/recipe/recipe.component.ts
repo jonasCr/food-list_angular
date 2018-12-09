@@ -10,7 +10,7 @@ import { RecipeData } from "src/app/data/recipe.data";
 })
 
 export class RecipeComponent implements OnInit{
-    recipes:Recipe[] = [];
+    recipes:Recipe[];
     constructor(
         public _globalService:GlobalService,
         private _recipeData:RecipeData
@@ -19,6 +19,7 @@ export class RecipeComponent implements OnInit{
         this._globalService.progress = true
         
         this._recipeData.getRecipes().subscribe((data:Recipe[])=> {
+            this.recipes = [];
             for (let recipe of data){
                 this.recipes.push(new Recipe(recipe))
             }

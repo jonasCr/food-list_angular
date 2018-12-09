@@ -32,8 +32,7 @@ export class ListComponent implements OnDestroy{
 
 
     ngOnDestroy(): void {
-       this.menuListObs.unsubscribe();
-        
+       this.menuListObs.unsubscribe(); 
     }
 
     displayedColumns: string[] = ['check', 'name', 'category', 'meal'];
@@ -46,19 +45,6 @@ export class ListComponent implements OnDestroy{
         public _listService:MenuListService
         ){
         this._globalService.setTitle('Food List');
-        this._globalService.progress = true;
-        let query:query = this._listService.getRangeDay()
-        this.menuListObs = this._menuData.getMenusByQuery(query).subscribe((menus:Menu[])=> {
-            this.menuList = [];
-            this.elementData = [];
-            for (let i = 0; i < menus.length; i++){
-                this.menuList.push(new Menu(menus[i]))
-                this._globalService.progress = false;
-                this.addRowToTable(menus[i], i );
-            }
-        })
-        
-
     }
 
     onCheck(event, indexes){
@@ -90,6 +76,25 @@ export class ListComponent implements OnDestroy{
                 
             }
         }
+    }
+
+    getMenus(event:query){
+        this._globalService.progress = true;
+        if (this.menuListObs){
+            this.menuListObs.unsubscribe();
+        }
+        //this.menuList = [];
+        this.menuListObs = this._menuData.getMenusByQuery(event).subscribe((menus:Menu[])=> {
+            this.menuList = [];
+            this.elementData = [];
+            for (let i = 0; i < menus.length; i++){
+                this.menuList.push(new Menu(menus[i]))
+                this._globalService.progress = false;
+                this.addRowToTable(menus[i], i );
+            }
+        })
+        this._globalService.progress = false;
+
     }
 
     

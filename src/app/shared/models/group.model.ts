@@ -1,5 +1,6 @@
 import { User } from "./user.model";
 
+
 export interface ParamsGroup{
     groupId?:string;
     name?:string;

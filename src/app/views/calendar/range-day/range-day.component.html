@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-6">
+        <mat-form-field>
+            <input placeholder="Desde" (dateChange)="onValueChange()" disabled [(ngModel)]="value.firstDay" matInput [matDatepicker]="picker1">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker disabled="false" #picker1></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-6">
+        <mat-form-field>
+            <input placeholder="Hasta" (dateChange)="onValueChange()" disabled [(ngModel)]="value.lastDay" matInput [matDatepicker]="picker2">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker disabled="false" #picker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>

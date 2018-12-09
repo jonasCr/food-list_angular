@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AuthService } from "src/app/services/auth.service";
+import { GroupData } from "src/app/data/group.data";
 
 @Component({
     selector:'app-login',
@@ -10,9 +11,10 @@ import { AuthService } from "src/app/services/auth.service";
 export class UserComponent {
     constructor(
         public afAuth:AngularFireAuth,
-        public authService:AuthService
+        public authService:AuthService,
+        private groupData:GroupData,
         ){
-            this.signUp();
+            this.getgroupofuser('Fn1YiLSlbtNy0Y6S6o9KGUysdRj1');
 
     }
 
@@ -31,5 +33,9 @@ export class UserComponent {
             // console.log(data);
             // console.log(this.authService.authState.uid)
         })
+    }
+
+    getgroupofuser(userId:string){
+        //this.groupData.collection.get('').
     }
 }

@@ -20,6 +20,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material'
+
 
 
 
@@ -47,7 +50,9 @@ import {MatSortModule} from '@angular/material/sort';
         MatSnackBarModule,
         MatProgressBarModule,
         MatTableModule,
-        MatSortModule        
+        MatSortModule,
+        MatDatepickerModule,
+        MatNativeDateModule        
     ],
     exports: [
         MatCardModule,
@@ -67,7 +72,9 @@ import {MatSortModule} from '@angular/material/sort';
         MatSnackBarModule,
         MatProgressBarModule,
         MatTableModule,
-        MatSortModule
+        MatSortModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
     providers: [],
 })

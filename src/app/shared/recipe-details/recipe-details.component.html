@@ -3,15 +3,6 @@
         <mat-panel-title>
             {{recipe.name}}
         </mat-panel-title>
-        <mat-panel-description class="com_panel_align-end">
-            <button *ngIf="parent == 'calendar'" mat-icon-button>
-                <mat-icon (click)="deleteRecipeFromMenu()">delete</mat-icon>
-            </button>
-            <button [routerLink]="[ '/recipe', recipe.idRecipe ]" *ngIf="parent == 'recipe'" mat-icon-button>
-                <mat-icon>edit</mat-icon>
-            </button>
-
-        </mat-panel-description>
     </mat-expansion-panel-header>
 
     <mat-card-header>
@@ -32,5 +23,14 @@
                 <span *ngIf="parent === 'recipe'">{{ingredient.name}}</span>
             </mat-list-item>
         </mat-list>
+        <mat-card-actions>
+            <button [routerLink]="['/recipe', recipe.idRecipe]" mat-mini-fab color="primary" mat-button>
+                <i  class="fas fa-pen"></i>
+            </button>
+            <button (click)="confirm()" mat-mini-fab color="warn" mat-button>
+                <i class="fas fa-trash"></i>
+            </button>
+        </mat-card-actions>
     </mat-card-content>
+
 </mat-expansion-panel>

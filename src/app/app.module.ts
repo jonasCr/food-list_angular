@@ -32,6 +32,8 @@ import { RecipeEditComponent } from './views/recipe-edit/recipe-edit.component';
 import { RecipeDialogCategory } from './views/recipe-edit/recipe-dialog-category';
 import { RateComponent } from './shared/components/rate/rate.component';
 import { UserComponent } from './shared/components/login/login.component';
+import { RangeDayComponent } from './views/calendar/range-day/range-day-component';
+import { ConfirmComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 
 
 
@@ -49,10 +51,13 @@ import { UserComponent } from './shared/components/login/login.component';
     RecipeEditComponent,
     RecipeDialogCategory,
     RateComponent,
-    UserComponent
+    UserComponent,
+    RangeDayComponent,
+    ConfirmComponent
   ],
   entryComponents: [
-    RecipeDialogCategory
+    RecipeDialogCategory,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,

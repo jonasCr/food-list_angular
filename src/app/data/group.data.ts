@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestoreCollection, AngularFirestore } from "@angular/fire/firestore";
 import { Group } from "../shared/models/group.model";
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
     providedIn: 'root',
@@ -21,5 +23,16 @@ export class GroupData {
         delete group.groupId
         this.collection.doc(groupId).set(group.getData());
     }
-}
 
+    getGroupOfUser(userId:string){
+        //debugger;
+        return this._afs.collection('groups', ref => ref.where('members', 'array-contains', userId))
+            .snapshotChanges().pipe(
+                map(group => group.map(a => {
+                    const data:any = a.payload.doc.data();
+                    const idGroup = a.payload.doc.id;
+                    return {idGroup,...data};
+                }))
+            );
+    }
+}

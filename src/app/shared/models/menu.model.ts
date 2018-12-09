@@ -22,8 +22,6 @@ export class Menu implements ParamsMenu {
             this.idMenu = params.idMenu;
         }
         if(params.meals != undefined){
-            if (params.idMenu = 'KCIPv6Ka8H9jo2P5DWry'){
-            }
             this.meals = [];
             for (let i = 0; i<params.meals.length; i++){
                 this.meals.push(new Recipe(params.meals[i]))

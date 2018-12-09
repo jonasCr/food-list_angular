@@ -39,8 +39,12 @@ export class RecipeData {
         this.collection.doc(recipe.idRecipe).set(recipe.getData());
     }
 
-    deleteRecipe(recipe:Recipe){
-        this.collection.doc(recipe.idRecipe).delete();
+    deleteRecipe(recipe:Recipe):Promise<any>{
+        return new Promise (resolve => {
+            this.collection.doc(recipe.idRecipe).delete().then(()=> {
+                resolve();
+            });
+        })
     }
     
 }
