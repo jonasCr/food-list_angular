@@ -1,11 +1,11 @@
 import { Component } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AuthService } from "src/app/services/auth.service";
+import { AuthService } from "src/app/auth/auth.service";
 import { GroupData } from "src/app/data/group.data";
 
 @Component({
     selector:'app-login',
-    templateUrl: './login.component.html'
+    templateUrl: './user.component.html'
 })
 
 export class UserComponent {
@@ -36,6 +36,8 @@ export class UserComponent {
     }
 
     getgroupofuser(userId:string){
-        //this.groupData.collection.get('').
+        this.groupData.getGroupOfUser(userId).subscribe((data)=> {
+            console.log(data);
+        })
     }
 }

@@ -26,7 +26,7 @@ export class GroupData {
 
     getGroupOfUser(userId:string){
         //debugger;
-        return this._afs.collection('groups', ref => ref.where('members', 'array-contains', userId))
+        return this._afs.collection('groups', ref => ref.where('membersIDs', 'array-contains', userId))
             .snapshotChanges().pipe(
                 map(group => group.map(a => {
                     const data:any = a.payload.doc.data();

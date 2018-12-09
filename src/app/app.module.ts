@@ -28,12 +28,12 @@ import { RecipeComponent } from './views/recipe/recipe.component';
 import { RecipeEditComponent } from './views/recipe-edit/recipe-edit.component';
 import { RecipeDialogCategory } from './views/recipe-edit/recipe-dialog-category';
 import { RateComponent } from './shared/components/rate/rate.component';
-import { UserComponent } from './shared/components/login/login.component';
 import { ConfirmComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { ListComponent } from './views/list/list.component';
 import { RecipeDetailsComponent } from './shared/components/recipe-details/recipe-details.component';
 import { RangeDayComponent } from './shared/components/range-day/range-day-component';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -51,7 +51,6 @@ import { RangeDayComponent } from './shared/components/range-day/range-day-compo
     RecipeEditComponent,
     RecipeDialogCategory,
     RateComponent,
-    UserComponent,
     RangeDayComponent,
     ConfirmComponent
   ],
@@ -65,6 +64,7 @@ import { RangeDayComponent } from './shared/components/range-day/range-day-compo
     MaterialModule,
     FirebaseModule,
     FormsModule,
+    AuthModule,
     APP_ROUTES,
     ReactiveFormsModule
   ],

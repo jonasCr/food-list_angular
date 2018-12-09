@@ -3,7 +3,7 @@ import { CalendarComponent } from "./views/calendar/calendar.component";
 import { ListComponent } from "./views/list/list.component";
 import { RecipeComponent } from "./views/recipe/recipe.component";
 import { RecipeEditComponent } from "./views/recipe-edit/recipe-edit.component";
-import { UserComponent } from "./shared/components/login/login.component";
+import { UserComponent } from "./auth/user/user.component";
 
 const ROUTES:Routes = [
     {path: '', component: CalendarComponent},

@@ -29,8 +29,7 @@ import {MatNativeDateModule} from '@angular/material'
 
 
 @NgModule({
-    declarations: [
-    ],
+    declarations: [],
     imports: [ 
         CommonModule,
         MatCardModule,
