@@ -23,17 +23,17 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(localEs);
 
 //Component
-import { NavbarComponent } from './shared/navbar/navbar.component';
 import { CalendarComponent } from './views/calendar/calendar.component';
-import { ListComponent } from './views/calendar/list/list.component';
 import { RecipeComponent } from './views/recipe/recipe.component';
-import { RecipeDetails } from './shared/recipe-details/recipe-details.component';
 import { RecipeEditComponent } from './views/recipe-edit/recipe-edit.component';
 import { RecipeDialogCategory } from './views/recipe-edit/recipe-dialog-category';
 import { RateComponent } from './shared/components/rate/rate.component';
 import { UserComponent } from './shared/components/login/login.component';
-import { RangeDayComponent } from './views/calendar/range-day/range-day-component';
 import { ConfirmComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { ListComponent } from './views/list/list.component';
+import { RecipeDetailsComponent } from './shared/components/recipe-details/recipe-details.component';
+import { RangeDayComponent } from './shared/components/range-day/range-day-component';
 
 
 
@@ -46,7 +46,7 @@ import { ConfirmComponent } from './shared/components/confirm-dialog/confirm-dia
     ListComponent,
     RecipeComponent,
     WeekdayPipe,
-    RecipeDetails,
+    RecipeDetailsComponent,
     NumberToArray,
     RecipeEditComponent,
     RecipeDialogCategory,

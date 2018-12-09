@@ -2,9 +2,8 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { Recipe } from "src/app/shared/models/recipe.model";
 import { RecipeData } from "src/app/data/recipe.data";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { ConfirmComponent } from "../components/confirm-dialog/confirm-dialog.component";
 import { NotificationService } from "src/app/services/notificacion.service";
-import { Router } from "@angular/router";
+import { ConfirmComponent } from "../confirm-dialog/confirm-dialog.component";
 
 
 @Component({
@@ -13,7 +12,7 @@ import { Router } from "@angular/router";
     styleUrls:['./recipe-details.component.scss']
 })
 
-export class RecipeDetails {
+export class RecipeDetailsComponent {
     @Input() recipe:Recipe;
     @Input() parent:string;
     @Output() deleteBtn:EventEmitter<boolean> = new EventEmitter;
@@ -22,10 +21,9 @@ export class RecipeDetails {
             public _recipeData:RecipeData,
             public dialog: MatDialog,
             private _notif:NotificationService,
-            private router:Router
         ){}
 
-    onChange(event){
+    onChange(){
         this.checkList.emit(this.recipe);
     }
 

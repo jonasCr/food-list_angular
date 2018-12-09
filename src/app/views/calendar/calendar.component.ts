@@ -1,7 +1,6 @@
 import { Component, OnDestroy } from "@angular/core";
 import { GlobalService } from "src/app/services/global.service";
 import { Menu } from "src/app/shared/models/menu.model";
-import { MenuListService } from "./list-menu.service";
 import { Recipe, ParamsRecipe } from "src/app/shared/models/recipe.model";
 import { Subscription } from "rxjs";
 import { MenuData } from "src/app/data/menu.data";
@@ -9,6 +8,7 @@ import { RecipeData } from "src/app/data/recipe.data";
 import { NotificationService } from "src/app/services/notificacion.service";
 import { Router } from "@angular/router";
 import { query } from "../../shared/models/query.model";
+import { MenuListService } from "./../../services/list-menu.service";
 
 @Component({
     selector:'app-calendar',
@@ -29,7 +29,7 @@ export class CalendarComponent implements OnDestroy{
             private router:Router,
             private _notif:NotificationService,
             private _globalService:GlobalService,
-            public  _menuList:MenuListService,
+            public _menuList:MenuListService,
             public _menuData:MenuData,
             public _recipeDate:RecipeData
         ){

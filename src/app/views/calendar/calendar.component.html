@@ -1,11 +1,5 @@
 <div class="com-calendar">
     <div>
-        <!-- <button (click)="getPrevWeek()" mat-icon-button>
-           <mat-icon>keyboard_arrow_left</mat-icon>
-       </button>
-        <button (click)="getNextWeek()" mat-icon-button>
-            <mat-icon>keyboard_arrow_right</mat-icon>
-        </button> -->
         <app-range-day (query)="getMenus($event)"></app-range-day>
     </div>
     <mat-card class="com-calendar__day" *ngFor="let menu of menus; let iMenu = index">

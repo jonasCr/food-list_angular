@@ -1,15 +1,13 @@
-import { Menu } from "../../shared/models/menu.model";
+import { Menu } from "./../shared/models/menu.model";
 import { Observable, Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { query } from "../../shared/models/query.model";
+import { query } from "./../shared/models/query.model";
 import { AngularFirestore } from "@angular/fire/firestore";
-import { MenuData } from "./../../data/menu.data";
+import { MenuData } from "./../data/menu.data";
 
 @Injectable({
   providedIn: 'root',
 })
-
-
 export class MenuListService{
     listMenu:Observable<Menu[]>;
     menuObs:Subscription;

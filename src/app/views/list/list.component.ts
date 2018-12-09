@@ -4,7 +4,7 @@ import { MenuData } from "src/app/data/menu.data";
 import { query } from "src/app/shared/models/query.model";
 import { Item } from "src/app/shared/models/item.model";
 import { Menu } from "src/app/shared/models/menu.model";
-import { MenuListService } from "../list-menu.service";
+import { MenuListService } from "./../../services/list-menu.service";
 import { MatTableDataSource, MatSort } from "@angular/material";
 import { Subscription } from "rxjs";
 
