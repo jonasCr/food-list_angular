@@ -23,7 +23,7 @@ export class MenuData {
 
     getMenusByQuery(query:query):Observable<any[]>{
         //debugger;
-        return this._afs.collection('menusDV', ref => ref.where('day', '>=', query.firstDay).where('day', '<=', query.lastDay))
+        return this._afs.collection('menus', ref => ref.where('day', '>=', query.firstDay).where('day', '<=', query.lastDay))
             .snapshotChanges().pipe(
                 map(menus => menus.map(a => {
                     const data:any = a.payload.doc.data();
