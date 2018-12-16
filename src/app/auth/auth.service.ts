@@ -12,36 +12,32 @@ import { ParamsGroup, Group } from '../shared/models/group.model';
 export class AuthService {
 
     user:User = null
+    userGroups:Group[]
 
     constructor(
         private afAuth:AngularFireAuth,
         private userData:UserData,
         private router:Router,
         private groupData:GroupData
-    ){}
+    ){
+        
+    }
 
-    signUpWithEmail(email, password, displayName:string){
-        this.afAuth.auth.createUserWithEmailAndPassword(email,password)
-        .then((user) => {
-            let paramsUser:ParamsUser = {
-                userId: user.user.uid,
-                displayName: displayName,
-                email: email,
-                //By default, we create a group with the id of the user
-                groupsIds:[user.user.uid]
-            }
-            this.user = new User(paramsUser);
-            console.log(this.user);
-            this.userData.setUser(this.user).then(()=> {
-                this.createGroup(new User(paramsUser))
-            });
-            //return
+    setUserData(idUser:string){
+        this.userData.getUser(idUser).subscribe(user => {
+            this.user = new User(user);
+            
         })
-        .catch(error => {
-            console.log(error)
-            throw error
+        this.groupData.getUserGroups(idUser).subscribe(groups => {
+            this.userGroups = [];
+            for (let i = 0; i < groups.length; i++) {
+                const group = groups[i];
+                this.userGroups.push(new Group(group));
+            }
         })
     }
+
+    
 
     loginWithEmail(email:string, password:string){
         return this.afAuth.auth.signInWithEmailAndPassword(email, password)
@@ -49,6 +45,7 @@ export class AuthService {
             this.userData.getUser(user.user.uid).subscribe(user=>{
                 this.user = new User(user);
                 console.log(this.user);
+                this.getUserGroup(this.user.userId)
             })
         })
         .catch(error => {
@@ -59,22 +56,22 @@ export class AuthService {
 
     signOut(): void {
         this.afAuth.auth.signOut();
-        this.router.navigate(['/'])
+        this.router.navigate(['/']);
+        localStorage.removeItem('user');
     }
 
-    createGroup(user:User){
 
-        let userList = []
-        userList.push(user);
-        let params:ParamsGroup = {
-            groupId: user.userId,
-            name: user.displayName,
-            members: userList
-        }
+    getUserGroup(idUser:string):Promise<any>{
+        return new Promise(resolve => {
+            this.groupData.getUserGroups(idUser).subscribe((data:Group[])=> {
+                this.userGroups = [];
+                for (let i = 0; i < data.length; i++) {
+                    const item = data[i];
+                    this.userGroups.push(new Group(item))
+                }
+                resolve();
+            })
+        })
         
-        this.groupData.setGroup(new Group(params));
     }
-    
-
-    
 }

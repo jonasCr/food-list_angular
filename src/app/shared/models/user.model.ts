@@ -4,7 +4,6 @@ export interface ParamsUser {
     userId?:string;
     displayName?:string;
     email?:string;
-    groupsIds?:string[];
     photo?:Image;
 }
 
@@ -12,7 +11,6 @@ export class User implements ParamsUser {
     userId?:string;
     displayName?:string;
     email?:string;
-    groupsIds?:string[];
     photo?:Image;
     constructor(params:ParamsUser){
         if(params.userId != undefined){
@@ -24,10 +22,6 @@ export class User implements ParamsUser {
 
         if(params.email != undefined){
             this.email = params.email
-        }
-
-        if(params.groupsIds != undefined){
-            this.groupsIds = params.groupsIds
         }
         
         if(params.photo != undefined){

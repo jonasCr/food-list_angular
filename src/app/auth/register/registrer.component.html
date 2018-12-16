@@ -1,0 +1,53 @@
+<button (click)="signOut()">
+    signOut
+</button>
+
+<div>
+    <form [formGroup]="registerForm" (ngSubmit)="signUp()" novalidate>
+        <div>
+            <mat-form-field>
+                <input formControlName="email" matInput placeholder="Email">
+                <mat-error *ngIf="registerForm.controls['email'].errors?.required && registerForm.dirty">
+                    Este campo es requerido
+                </mat-error>
+                <mat-error *ngIf="registerForm.controls['email'].errors?.email && registerForm.dirty">
+                    El correo no es valido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input formControlName="displayName" matInput placeholder="Pseudo">
+                <mat-error *ngIf="registerForm.controls['displayName'].errors?.required && registerForm.dirty">
+                    Este campo es requerido
+                </mat-error>
+                <mat-error *ngIf="registerForm.controls['displayName'].errors?.minlength != undefined && registerForm.dirty">
+                    Tu pseudo debe tener minimo 3 caracteres
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input type="password" formControlName="password" matInput placeholder="Contraseña">
+                <mat-error *ngIf="registerForm.controls['password'].errors?.required != null && registerForm.dirty">
+                    Este campo es requerido
+                </mat-error>
+                <mat-error *ngIf="registerForm.controls['password'].errors?.minlength && registerForm.dirty">
+                    La contraseña debe tener minimo 6 caracteres
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input type="password" formControlName="passwordConfirm" matInput placeholder="Repite Contraseña">
+                <mat-error *ngIf="registerForm.controls['password'].errors?.required && registerForm.dirty">
+                    Este campo es requerido
+                </mat-error>
+                <mat-error>
+                    Las contraseñas no corresponden
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <button type="submit" mat-raised-button>Crear Cuenta</button>
+    </form>
+</div>

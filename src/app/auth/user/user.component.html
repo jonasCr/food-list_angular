@@ -1,0 +1,24 @@
+<button *ngIf="!user" class="mat-menu-trigger" mat-icon-button>
+    <mat-icon><i class="fas fa-user-circle"></i></mat-icon>
+</button>
+
+
+<button *ngIf="user" class="mat-menu-trigger" mat-icon-button [matMenuTriggerFor]="user">
+    <!-- <img matListAvatar [src]="user.photo.url" > -->
+</button>
+
+
+<mat-menu class="navbar-menu" #user="matMenu">
+    <button class="navbar-item" mat-menu-item>
+        <mat-icon><i class="far fa-calendar-alt"></i></mat-icon>
+        <span>Calendario</span>
+    </button>
+    <button class="navbar-item" mat-menu-item>
+        <mat-icon><i class="fas fa-clipboard-list"></i></mat-icon>
+        <span>Lista de Comidat</span>
+    </button>
+    <button class="navbar-item" mat-menu-item>
+        <mat-icon><i class="fas fa-utensils"></i></mat-icon>
+        <span>Recettas</span>
+    </button>
+</mat-menu>

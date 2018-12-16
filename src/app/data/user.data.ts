@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
 import { User } from "../shared/models/user.model";
 import { map } from 'rxjs/operators';
+import { Observable } from "rxjs";
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class UserData {
 
     getUser(userId:string){
         return this.collection.doc(userId).snapshotChanges().pipe(
-            map(user =>  {
+            map((user) =>  {
                 const data = user.payload.data();
                 const userId = user.payload.id;
                 return {userId, ...data}
@@ -23,9 +24,9 @@ export class UserData {
     }
 
     setUser(user:User){
-        let idUser = user.userId;
-        delete user.userId
-        return this.collection.doc(idUser).set(user.getData());
+        let data = user.getData();
+        delete data.userId
+        return this.collection.doc(user.userId).set(data);
     }
 
 }

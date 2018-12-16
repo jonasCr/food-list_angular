@@ -14,17 +14,17 @@ export class GroupData {
 
     //To create a new group of person
     createGroup(group:Group){
-        this.collection.add(group.getData());
+        return this.collection.add(group.getData());
     }
 
     //to create the by default group of an user
-    setGroup(group:Group){
+    upDateGroup(group:Group){
         let groupId = group.groupId;
         delete group.groupId
         this.collection.doc(groupId).set(group.getData());
     }
 
-    getGroupOfUser(userId:string){
+    getUserGroups(userId:string){
         //debugger;
         return this._afs.collection('groups', ref => ref.where('membersIDs', 'array-contains', userId))
             .snapshotChanges().pipe(

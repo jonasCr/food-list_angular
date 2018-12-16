@@ -5,22 +5,23 @@
         </div>
         <div>
             <button class="mat-menu-trigger" mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon><i class="fas fa-bars"></i></mat-icon>
-          </button>
+                <mat-icon><i class="fas fa-bars"></i></mat-icon>
+            </button>
             <mat-menu class="navbar-menu" #menu="matMenu">
                 <button class="navbar-item" mat-menu-item [routerLink]="['/calendar']">
-              <mat-icon><i class="far fa-calendar-alt"></i></mat-icon>
-              <span>Calendar</span>
-            </button>
+                    <mat-icon><i class="far fa-calendar-alt"></i></mat-icon>
+                    <span>Calendario</span>
+                </button>
                 <button class="navbar-item" [routerLink]="[ '/list' ]" mat-menu-item>
-              <mat-icon><i class="fas fa-clipboard-list"></i></mat-icon>
-              <span>Food List</span>
-            </button>
+                    <mat-icon><i class="fas fa-clipboard-list"></i></mat-icon>
+                    <span>Lista de Comida</span>
+                </button>
                 <button class="navbar-item" [routerLink]="[ '/recipe' ]" mat-menu-item>
-              <mat-icon><i class="fas fa-utensils"></i></mat-icon>
-              <span>Recipe</span>
-            </button>
+                    <mat-icon><i class="fas fa-utensils"></i></mat-icon>
+                    <span>Recettas</span>
+                </button>
             </mat-menu>
+
         </div>
 
     </mat-toolbar-row>
