@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { User, ParamsUser } from '../shared/models/user.model';
-import { UserData } from '../data/user.data';
-import { GroupData } from '../data/group.data';
-import { ParamsGroup, Group } from '../shared/models/group.model';
+import { User } from '../shared/models/user.model';
+import { UserData } from '../data/user/user.data';
+import { GroupData } from '../data/user/group.data';
+import { Group } from '../shared/models/group.model';
+import { Notification } from '../shared/models/notification.model';
+import { NotificationData } from '../data/user/notification.data';
 
 @Injectable({
   providedIn: 'root',
@@ -12,28 +14,54 @@ import { ParamsGroup, Group } from '../shared/models/group.model';
 export class AuthService {
 
     user:User = null
-    userGroups:Group[]
-
+    userGroups:Group[];
+    unreadedNotification:Notification[];
+    readedNotification:Notification[]
     constructor(
         private afAuth:AngularFireAuth,
         private userData:UserData,
         private router:Router,
-        private groupData:GroupData
+        private groupData:GroupData,
+        private notificationData:NotificationData
     ){
         
     }
 
-    setUserData(idUser:string){
-        this.userData.getUser(idUser).subscribe(user => {
-            this.user = new User(user);
+    setUserData(idUser:string):Promise<void>{
+        return new Promise(resolve => {
+            this.userData.getUser(idUser).subscribe(user => {
+                this.user = new User(user);
+                this.groupData.getUserGroups(idUser).subscribe(groups => {
+                    this.userGroups = [];
+                    for (let i = 0; i < groups.length; i++) {
+                        const group = groups[i];
+                        this.userGroups.push(new Group(group));
+                    }
+                    this.setNotification(idUser)
+                })
+            })
             
+            
+
+            resolve()
         })
-        this.groupData.getUserGroups(idUser).subscribe(groups => {
-            this.userGroups = [];
-            for (let i = 0; i < groups.length; i++) {
-                const group = groups[i];
-                this.userGroups.push(new Group(group));
+        
+    }
+
+    setNotification(idUser:string){
+        this.notificationData.getUserNotifications(idUser).subscribe((notifications:Notification[])=> {
+            this.readedNotification = [];
+            this. unreadedNotification = [];
+            for (let i = 0; i < notifications.length; i++){
+                const notification = notifications[i];
+                if (notification.read){
+                    this.readedNotification.push(new Notification(notification))
+                }else {
+                    this.unreadedNotification.push(new Notification(notification));
+                }
             }
+            console.log(this.unreadedNotification)
+            console.log(this.readedNotification)
         })
     }
 
@@ -55,9 +83,14 @@ export class AuthService {
     }
 
     signOut(): void {
-        this.afAuth.auth.signOut();
-        this.router.navigate(['/']);
-        localStorage.removeItem('user');
+        this.afAuth.auth.signOut().then(()=> {
+            this.user = null;
+            this.userGroups = null;
+            this.unreadedNotification = null;
+            this.readedNotification = null;
+            localStorage.removeItem('user');
+            this.router.navigate(['/login']);
+        });
     }
 
 

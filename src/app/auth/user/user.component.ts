@@ -1,9 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AuthService } from "src/app/auth/auth.service";
-import { GroupData } from "src/app/data/group.data";
+import { GroupData } from "src/app/data/user/group.data";
 import { User } from "src/app/shared/models/user.model";
 import { Group } from "src/app/shared/models/group.model";
+import { MatMenuTrigger } from "@angular/material";
+import { Router } from "@angular/router";
 
 @Component({
     selector:'app-user',
@@ -11,34 +13,29 @@ import { Group } from "src/app/shared/models/group.model";
 })
 
 export class UserComponent {
+    @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger
     user:User;
     userGroups:Group[]
     constructor(
         public afAuth:AngularFireAuth,
         public authService:AuthService,
         private groupData:GroupData,
+        private router:Router
         ){
             //this.login();
 
     }
 
-    
-
-    login(){
-        let email = 'jonas.cruchon@gmail.com';
-        let password = '123456';
-        //let displayName = 'jonas';
-        this.authService.loginWithEmail(email,password).then(data => {
-            this.user = this.authService.user;
-            this.userGroups = this.authService.userGroups;
-            console.log(this.userGroups);
-            console.log(this.user);
-        })
+    openMenu(){
+        //debugger;
+        if (this.authService.user != null){
+            this.trigger.openMenu();
+        }else {
+            this.router.navigate(['/login'])
+        }
     }
 
-    getgroupofuser(userId:string){
-        this.groupData.getUserGroups(userId).subscribe((data)=> {
-            console.log(data);
-        })
+    logOut(){
+        this.authService.signOut();
     }
 }

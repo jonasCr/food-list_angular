@@ -4,13 +4,11 @@ import { Image } from "src/app/shared/models/image.model";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { User, ParamsUser } from "src/app/shared/models/user.model";
 import { UserToken } from "src/app/shared/models/userToken.model";
-import { UserData } from "src/app/data/user.data";
-import { GroupData } from "src/app/data/group.data";
+import { UserData } from "src/app/data/user/user.data";
+import { GroupData } from "src/app/data/user/group.data";
 import { ParamsGroup, Group } from "src/app/shared/models/group.model";
 import {FormControl, Validators, FormGroup} from '@angular/forms';
 import { Router } from "@angular/router";
-
-const emailPatern = new RegExp(/[\w]+@{1}[\w]+\.[a-z]{2,3}/)
 
 
 @Component({

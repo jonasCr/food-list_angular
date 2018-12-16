@@ -1,0 +1,27 @@
+<div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+        <div>
+            <mat-form-field>
+                <input formControlName="email" matInput placeholder="Email">
+                <mat-error *ngIf="loginForm.controls['email'].errors?.required && loginForm.dirty">
+                    Este campo es requerido
+                </mat-error>
+                <mat-error *ngIf="loginForm.controls['email'].errors?.email && loginForm.dirty">
+                    El correo no es valido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input type="password" formControlName="password" matInput placeholder="Contraseña">
+                <mat-error *ngIf="loginForm.controls['password'].errors?.required != null && loginForm.dirty">
+                    Este campo es requerido
+                </mat-error>
+                <mat-error *ngIf="loginForm.controls['password'].errors?.minlength && loginForm.dirty">
+                    La contraseña debe tener minimo 6 caracteres
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <button type="submit" mat-raised-button>Login</button>
+    </form>
+</div>

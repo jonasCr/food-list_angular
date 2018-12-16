@@ -19,13 +19,13 @@ import { MaterialModule } from '../material.module';
         CommonModule,
         MaterialModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
         
     ],
     exports: [
         UserComponent,
         LoginComponent,
-        RegistrerComponent
+        RegistrerComponent,
     ],
     providers: [],
 })

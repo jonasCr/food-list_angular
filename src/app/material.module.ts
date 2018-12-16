@@ -22,11 +22,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material'
-
-
-
-
-
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
     declarations: [],
@@ -51,7 +47,8 @@ import {MatNativeDateModule} from '@angular/material'
         MatTableModule,
         MatSortModule,
         MatDatepickerModule,
-        MatNativeDateModule        
+        MatNativeDateModule,
+        MatBadgeModule        
     ],
     exports: [
         MatCardModule,
@@ -73,7 +70,8 @@ import {MatNativeDateModule} from '@angular/material'
         MatTableModule,
         MatSortModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatBadgeModule
     ],
     providers: [],
 })

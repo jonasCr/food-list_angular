@@ -1,24 +1,46 @@
-<button *ngIf="!user" class="mat-menu-trigger" mat-icon-button>
-    <mat-icon><i class="fas fa-user-circle"></i></mat-icon>
+<button #menuTrigger="matMenuTrigger" (click)="openMenu()" class="mat-menu-trigger" mat-icon-button [matMenuTriggerFor]="user">
+    <mat-icon [matBadge]="authService.unreadedNotification.length" matBadgeColor="warn">
+        <i class="fas fa-user-circle"></i>
+    </mat-icon>
 </button>
 
 
-<button *ngIf="user" class="mat-menu-trigger" mat-icon-button [matMenuTriggerFor]="user">
-    <!-- <img matListAvatar [src]="user.photo.url" > -->
-</button>
+<mat-menu #user="matMenu">
+    <div *ngIf="authService.user">
+        <button [matMenuTriggerFor]="notifications" class="navbar-item" mat-menu-item>
+            <mat-icon [matBadge]="authService.unreadedNotification.length" matBadgeColor="warn">
+                <i class="far fa-envelope"></i>
+            </mat-icon>
+            <span>Mensajes</span>
+        </button>
+        <button [matMenuTriggerFor]="groups" class="navbar-item" mat-menu-item>
+            <mat-icon><i class="fas fa-users"></i></mat-icon>
+            <span>Groupos</span>
+        </button>
+        <button class="navbar-item" mat-menu-item>
+            <mat-icon><i class="fas fa-user-cog"></i></mat-icon>
+            <span>Mi Cuenta</span>
+        </button>
+        <button (click)="logOut()" class="navbar-item" mat-menu-item>
+            <mat-icon><i class="fas fa-user-times"></i></mat-icon>
+            <span>Cerrar cession</span>
+        </button>
+    </div>
+
+</mat-menu>
+
+<mat-menu #groups="matMenu">
+    <button *ngFor="let group of authService.userGroups" class="navbar-item" mat-menu-item>
+        <span>{{group.name}}</span>
+    </button>
+</mat-menu>
 
 
-<mat-menu class="navbar-menu" #user="matMenu">
-    <button class="navbar-item" mat-menu-item>
-        <mat-icon><i class="far fa-calendar-alt"></i></mat-icon>
-        <span>Calendario</span>
+<mat-menu #notifications="matMenu">
+    <button *ngFor="let unreadNotifications of authService.unreadedNotification" class="navbar-item" mat-menu-item>
+        <span>{{unreadNotifications.content}}</span>
     </button>
-    <button class="navbar-item" mat-menu-item>
-        <mat-icon><i class="fas fa-clipboard-list"></i></mat-icon>
-        <span>Lista de Comidat</span>
-    </button>
-    <button class="navbar-item" mat-menu-item>
-        <mat-icon><i class="fas fa-utensils"></i></mat-icon>
-        <span>Recettas</span>
+    <button *ngFor="let readNotifications of authService.readedNotification" class="navbar-item" mat-menu-item>
+        <span>{{readNotifications.content}}</span>
     </button>
 </mat-menu>
