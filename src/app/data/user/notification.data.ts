@@ -49,11 +49,11 @@ export class NotificationData {
     
 
     getUserNotifications(userId:string){
-        debugger;
         return this._afs.collection('notifications', ref => ref.where('toIdUser', '==', userId))
             .snapshotChanges().pipe(
                 map(notifiaction => notifiaction.map(a => {
                     const data:any = a.payload.doc.data();
+                    data.date = data.date.toDate();
                     const idNotification = a.payload.doc.id;
                     return {idNotification,...data};
                 }))

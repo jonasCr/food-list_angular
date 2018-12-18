@@ -7,13 +7,15 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrerComponent } from './register/registrer.component';
 import { MaterialModule } from '../material.module';
+import { NotificationComponent } from './notification/notificaction.component';
 
 
 @NgModule({
     declarations: [
         UserComponent,
         LoginComponent,
-        RegistrerComponent
+        RegistrerComponent,
+        NotificationComponent
     ],
     imports: [ 
         CommonModule,
@@ -26,6 +28,7 @@ import { MaterialModule } from '../material.module';
         UserComponent,
         LoginComponent,
         RegistrerComponent,
+        NotificationComponent
     ],
     providers: [],
 })

@@ -26,10 +26,10 @@ export class AppComponent {
           this.authService.setUserData(token.userID);
           localStorage.setItem('user', JSON.stringify(new UserToken(token.userID)));
         }else {
-          this.router.navigate(['/login'])
+          //this.router.navigate(['/login'])
         }
       }else {
-        this.router.navigate(['/login'])
+        //this.router.navigate(['/login'])
       }
 
   }

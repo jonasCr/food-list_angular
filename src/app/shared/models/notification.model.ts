@@ -3,7 +3,8 @@ export interface NotificationParams {
     toIdUser?:string;
     content?:string;
     read?:boolean;
-    type:number;
+    type?:number;
+    date?:Date;
 }
 
 export class Notification implements NotificationParams{
@@ -11,7 +12,8 @@ export class Notification implements NotificationParams{
     toIdUser?:string;
     content?:string;
     read?:boolean;
-    type:number;
+    type?:number;
+    date?:Date;
 
     constructor(params:NotificationParams){
         if(params.fromIdUser != undefined){
@@ -32,6 +34,9 @@ export class Notification implements NotificationParams{
 
         if(params.type != undefined){
             this.type = params.type
+        }
+        if(params.date != undefined){
+            this.date = params.date
         }
     }
 

@@ -1,0 +1,5 @@
+<div *ngIf="notification && userFrom" mat-menu-item>
+    <p><small>{{notification.date | date}}</small></p>
+    <p>{{userFrom.displayName}}</p>
+    <p>{{notification.content}}</p>
+</div>
