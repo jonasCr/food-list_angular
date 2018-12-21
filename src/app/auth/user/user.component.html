@@ -1,5 +1,5 @@
 <button #menuTrigger="matMenuTrigger" (click)="openMenu()" class="mat-menu-trigger" mat-icon-button [matMenuTriggerFor]="user">
-    <mat-icon matBadgeColor="warn">
+    <mat-icon [matBadge]="authService.unreadNotification" matBadgeColor="warn">
         <i class="fas fa-user-circle"></i>
     </mat-icon>
 </button>
@@ -8,7 +8,7 @@
 <mat-menu #user="matMenu">
     <div *ngIf="authService.user">
         <button [matMenuTriggerFor]="notifications" class="navbar-item" mat-menu-item>
-            <mat-icon matBadgeColor="warn">
+            <mat-icon [matBadge]="authService.unreadNotification" matBadgeColor="warn">
                 <i class="far fa-envelope"></i>
             </mat-icon>
             <span>Mensajes</span>
@@ -40,8 +40,8 @@
     <!-- <div *ngFor="let unreadNotifications of authService.unreadedNotification" class="navbar-item" mat-menu-item>
         <span>{{unreadNotifications.content}}</span>
     </div> -->
-    <app-notification [notification]="unreadNotifications" *ngFor="let unreadNotifications of authService.unreadedNotification"></app-notification>
-    <div *ngFor="let readNotifications of authService.readedNotification" class="navbar-item" mat-menu-item>
+    <app-notification [notification]="notification" *ngFor="let notification of authService.notifications"></app-notification>
+    <!-- <div *ngFor="let readNotifications of authService.readedNotification" class="navbar-item" mat-menu-item>
         <span>{{readNotifications.content}}</span>
-    </div>
+    </div> -->
 </mat-menu>

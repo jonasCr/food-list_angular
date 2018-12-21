@@ -34,6 +34,7 @@ import { ListComponent } from './views/list/list.component';
 import { RecipeDetailsComponent } from './shared/components/recipe-details/recipe-details.component';
 import { RangeDayComponent } from './shared/components/range-day/range-day-component';
 import { AuthModule } from './auth/auth.module';
+import { NotificationDetailsComponent } from './auth/notification/notification-details.component';
 
 
 
@@ -52,11 +53,13 @@ import { AuthModule } from './auth/auth.module';
     RecipeDialogCategory,
     RateComponent,
     RangeDayComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    NotificationDetailsComponent
   ],
   entryComponents: [
     RecipeDialogCategory,
-    ConfirmComponent
+    ConfirmComponent,
+    NotificationDetailsComponent
   ],
   imports: [
     BrowserModule,

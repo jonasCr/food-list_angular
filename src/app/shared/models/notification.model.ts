@@ -1,4 +1,5 @@
 export interface NotificationParams {
+    idNotification?:string;
     fromIdUser?:string;
     toIdUser?:string;
     content?:string;
@@ -8,6 +9,7 @@ export interface NotificationParams {
 }
 
 export class Notification implements NotificationParams{
+    idNotification?:string;
     fromIdUser?:string;
     toIdUser?:string;
     content?:string;
@@ -16,6 +18,9 @@ export class Notification implements NotificationParams{
     date?:Date;
 
     constructor(params:NotificationParams){
+        if(params.idNotification != undefined){
+            this.idNotification = params.idNotification
+        }
         if(params.fromIdUser != undefined){
             this.fromIdUser = params.fromIdUser
         }

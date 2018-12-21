@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { User } from '../shared/models/user.model';
+import { User, ParamsUser } from '../shared/models/user.model';
 import { UserData } from '../data/user/user.data';
 import { GroupData } from '../data/user/group.data';
 import { Group } from '../shared/models/group.model';
-import { Notification } from '../shared/models/notification.model';
+import { Notification, NotificationParams } from '../shared/models/notification.model';
 import { NotificationData } from '../data/user/notification.data';
 
 @Injectable({
@@ -15,8 +15,8 @@ export class AuthService {
 
     user:User = null
     userGroups:Group[];
-    unreadedNotification:Notification[];
-    readedNotification:Notification[]
+    notifications:Notification[];
+    unreadNotification:number = 0;
     constructor(
         private afAuth:AngularFireAuth,
         private userData:UserData,
@@ -24,6 +24,24 @@ export class AuthService {
         private groupData:GroupData,
         private notificationData:NotificationData
     ){
+
+        // let userParams:ParamsUser = {
+        //     displayName: 'test',
+        //     email: 'test.ch',
+        //     userId: '12345678jd',
+        // }
+        // let notifParams:NotificationParams =  {
+        //     fromIdUser: '212344324',
+        //     toIdUser: '12535453',
+        //     content: 'lorem éasdjféa sdlfnlasnflashnfd asldhfalsdnflasf alsdfalsdfn alsdfhafslnlaksdbf asdlfbasdlfb',
+        //     date: new Date(),
+        //     read: false,
+        //     type: 1
+        // }
+        // this.unreadedNotification = [];
+        // this.unreadedNotification.push(new Notification(notifParams))
+        // this.user = new User(userParams);
+
         
     }
 
@@ -50,18 +68,15 @@ export class AuthService {
 
     setNotification(idUser:string){
         this.notificationData.getUserNotifications(idUser).subscribe((notifications:Notification[])=> {
-            this.readedNotification = [];
-            this. unreadedNotification = [];
+            this.notifications = [];
+            console.log(notifications);
             for (let i = 0; i < notifications.length; i++){
                 const notification = notifications[i];
-                if (notification.read){
-                    this.readedNotification.push(new Notification(notification))
-                }else {
-                    this.unreadedNotification.push(new Notification(notification));
+                this.notifications.push(new Notification(notification))
+                if (!notification.read){
+                    this.unreadNotification++;
                 }
             }
-            console.log(this.unreadedNotification)
-            console.log(this.readedNotification)
         })
     }
 
@@ -86,8 +101,7 @@ export class AuthService {
         this.afAuth.auth.signOut().then(()=> {
             this.user = null;
             this.userGroups = null;
-            this.unreadedNotification = null;
-            this.readedNotification = null;
+            this.notifications = null;
             localStorage.removeItem('user');
             this.router.navigate(['/login']);
         });

@@ -38,16 +38,12 @@ export class NotificationData {
     }
 
     //to create the by default group of an user
-    upDateGroup(group){
-        let groupId = group.groupId;
-        delete group.groupId
-        this.collection.doc(groupId).set(group.getData());
+    updateNotification(notificacion:Notification){
+        let data = notificacion.getData();
+        delete data.idNotification;
+        this.collection.doc(notificacion.idNotification).set(data);
     }
-
-
-
     
-
     getUserNotifications(userId:string){
         return this._afs.collection('notifications', ref => ref.where('toIdUser', '==', userId))
             .snapshotChanges().pipe(

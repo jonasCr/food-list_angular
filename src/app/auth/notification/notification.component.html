@@ -1,5 +1,8 @@
-<div *ngIf="notification && userFrom" mat-menu-item>
-    <p><small>{{notification.date | date}}</small></p>
-    <p>{{userFrom.displayName}}</p>
-    <p>{{notification.content}}</p>
+<div (click)="onClickNotification()" [ngClass]="{'com_notification': notification.read, 'com_notification__unread': !notification.read, 'third': false}" class="com_notification" *ngIf="notification && userFrom" mat-menu-item>
+    <div class="com_notifaction__inner">
+        <p class="com_notification__date"><small>{{notification.date | date}}</small></p>
+        <p class="com_notification__userName">{{userFrom.displayName}}</p>
+        <p class="com_notification__content">{{notification.content}}</p>
+    </div>
+    
 </div>
