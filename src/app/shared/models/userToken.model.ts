@@ -4,6 +4,5 @@ export class UserToken {
     constructor(userId:string){
         this.userID = userId;
         this.expire.setDate(this.expire.getDate()+7);
-        console.log(this.expire);
     }
 }

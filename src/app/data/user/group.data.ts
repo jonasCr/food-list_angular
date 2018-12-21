@@ -17,11 +17,21 @@ export class GroupData {
         return this.collection.add(group.getData());
     }
 
+    getGroup(idGroup:string){
+        return this.collection.doc(idGroup).snapshotChanges().pipe(
+            map(group =>  {
+                const data = group.payload.data();
+                const idGroup = group.payload.id;
+                return new Group({idGroup, ...data})
+            })
+        );
+    }
+
     //to create the by default group of an user
     upDateGroup(group:Group){
-        let groupId = group.groupId;
-        delete group.groupId
-        this.collection.doc(groupId).set(group.getData());
+        let idGroup = group.idGroup;
+        delete group.idGroup
+        this.collection.doc(idGroup).set(group.getData());
     }
 
     getUserGroups(userId:string){

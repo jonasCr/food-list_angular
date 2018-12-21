@@ -5,6 +5,8 @@ import { UserData } from "src/app/data/user/user.data";
 import { NotificationData } from "src/app/data/user/notification.data";
 import { MatDialog } from "@angular/material";
 import { NotificationDetailsComponent } from "./notification-details.component";
+import { GroupData } from "src/app/data/user/group.data";
+import { ParamsGroup, Group } from "src/app/shared/models/group.model";
 
 @Component({
     selector:'app-notification',
@@ -19,15 +21,14 @@ export class NotificationComponent implements OnInit{
         private userData:UserData,
         private nData:NotificationData,
         public dialog: MatDialog,
+        private gData:GroupData,
     ){
         
 
     }
     ngOnInit(){
-        console.log(this.notification)
         this.userData.getUser(this.notification.fromIdUser).subscribe((data:ParamsUser)=> {
             this.userFrom = new User(data);
-            console.log(this.userFrom);
         })
 
     }
@@ -41,13 +42,9 @@ export class NotificationComponent implements OnInit{
         });
 
         dialogRef.afterClosed().subscribe((data)=> {
-            console.log(data);
+            if (data){
+                console.log(data);
+            }
         })
-    }
-
-    openDialog(){
-        
-        
-
     }
 }

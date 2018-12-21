@@ -58,9 +58,6 @@ export class AuthService {
                     this.setNotification(idUser)
                 })
             })
-            
-            
-
             resolve()
         })
         
@@ -69,7 +66,6 @@ export class AuthService {
     setNotification(idUser:string){
         this.notificationData.getUserNotifications(idUser).subscribe((notifications:Notification[])=> {
             this.notifications = [];
-            console.log(notifications);
             for (let i = 0; i < notifications.length; i++){
                 const notification = notifications[i];
                 this.notifications.push(new Notification(notification))

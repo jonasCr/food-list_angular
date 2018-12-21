@@ -2,20 +2,19 @@ import { User } from "./user.model";
 
 
 export interface ParamsGroup{
-    groupId?:string;
+    idGroup?:string;
     name?:string;
     membersIDs?:string[];
 }
 
 export class Group implements ParamsGroup{
-    groupId?:string;
+    idGroup?:string;
     name?:string;
     membersIDs?:string[];
 
     constructor(params:ParamsGroup){
-        console.log(params);
-        if (params.groupId != undefined){
-            this.groupId = params.groupId
+        if (params.idGroup != undefined){
+            this.idGroup = params.idGroup
         }
         if (params.name != undefined){
             this.name = params.name

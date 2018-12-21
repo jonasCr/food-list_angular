@@ -103,10 +103,9 @@ export class RegistrerComponent {
     }
 
     createDefaultGroup(user:User):Promise<any>{
-        debugger;
         return new Promise(resolve => {
             let params:ParamsGroup = {
-                groupId: user.userId,
+                idGroup: user.userId,
                 name: user.displayName,
                 membersIDs: [user.userId]
             }
