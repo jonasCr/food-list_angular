@@ -12,7 +12,7 @@ export class Group implements ParamsGroup{
     name?:string;
     membersIDs?:string[];
 
-    constructor(params:ParamsGroup){
+    constructor(params?:ParamsGroup){
         if (params.idGroup != undefined){
             this.idGroup = params.idGroup
         }

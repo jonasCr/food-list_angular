@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { RegistrerComponent } from './register/registrer.component';
 import { MaterialModule } from '../material.module';
 import { NotificationComponent } from './notification/notificaction.component';
+import { NotificationDetailsComponent } from './notification/notification-details.component';
+import { GroupDialogComponent } from './group/group-dialog.component';
 
 
 @NgModule({
@@ -15,14 +17,19 @@ import { NotificationComponent } from './notification/notificaction.component';
         UserComponent,
         LoginComponent,
         RegistrerComponent,
-        NotificationComponent
+        NotificationComponent,
+        NotificationDetailsComponent,
+        GroupDialogComponent
+    ],
+    entryComponents:[
+        NotificationDetailsComponent,
+        GroupDialogComponent
     ],
     imports: [ 
         CommonModule,
         MaterialModule,
         FormsModule,
-        ReactiveFormsModule,
-        
+        ReactiveFormsModule, 
     ],
     exports: [
         UserComponent,

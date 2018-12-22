@@ -29,4 +29,15 @@ export class UserData {
         return this.collection.doc(user.userId).set(data);
     }
 
+    getUserByEmail(email:string){
+        return this._afs.collection('users', ref => ref.where('email', '==', email))
+            .snapshotChanges().pipe(
+                map(user => user.map(u => {
+                    const data:any = u.payload.doc.data();
+                    const idUser = u.payload.doc.id;
+                    return {idUser, ...data};
+                }))
+            )
+    }
+
 }

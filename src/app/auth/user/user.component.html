@@ -33,6 +33,9 @@
     <button *ngFor="let group of authService.userGroups" class="navbar-item" mat-menu-item>
         <span>{{group.name}}</span>
     </button>
+    <button (click)="createInvitation()" mat-menu-item>
+        <span>Invitar a alguien</span>
+    </button>
 </mat-menu>
 
 

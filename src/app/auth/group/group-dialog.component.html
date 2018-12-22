@@ -1,0 +1,15 @@
+<h1 mat-dialog-title></h1>
+<div mat-dialog-content>
+  <p>Quien quieres invitar ?</p>
+  <mat-form-field>
+    <input (keyup)="checkUser()" matInput [(ngModel)]="emailInvited" placeholder="Indica el correo de la persona">
+  </mat-form-field>
+  <p>Elige un nombre para el groupo</p>
+  <mat-form-field>
+    <input [disabled]="!userValid" matInput [(ngModel)]="nameGroup">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button [disabled]="!userValid"  mat-button (click)="sendData()" >Ok</button>
+</div>

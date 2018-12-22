@@ -23,27 +23,7 @@ export class AuthService {
         private router:Router,
         private groupData:GroupData,
         private notificationData:NotificationData
-    ){
-
-        // let userParams:ParamsUser = {
-        //     displayName: 'test',
-        //     email: 'test.ch',
-        //     userId: '12345678jd',
-        // }
-        // let notifParams:NotificationParams =  {
-        //     fromIdUser: '212344324',
-        //     toIdUser: '12535453',
-        //     content: 'lorem éasdjféa sdlfnlasnflashnfd asldhfalsdnflasf alsdfalsdfn alsdfhafslnlaksdbf asdlfbasdlfb',
-        //     date: new Date(),
-        //     read: false,
-        //     type: 1
-        // }
-        // this.unreadedNotification = [];
-        // this.unreadedNotification.push(new Notification(notifParams))
-        // this.user = new User(userParams);
-
-        
-    }
+    ){}
 
     setUserData(idUser:string):Promise<void>{
         return new Promise(resolve => {

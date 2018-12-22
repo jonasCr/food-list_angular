@@ -35,7 +35,6 @@ export class GroupData {
     }
 
     getUserGroups(userId:string){
-        //debugger;
         return this._afs.collection('groups', ref => ref.where('membersIDs', 'array-contains', userId))
             .snapshotChanges().pipe(
                 map(group => group.map(a => {
@@ -45,4 +44,6 @@ export class GroupData {
                 }))
             );
     }
+
+    
 }
