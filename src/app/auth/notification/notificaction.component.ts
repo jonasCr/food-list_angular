@@ -27,6 +27,7 @@ export class NotificationComponent implements OnInit{
 
     }
     ngOnInit(){
+        console.log(this.notification)
         this.userData.getUser(this.notification.fromIdUser).subscribe((data:ParamsUser)=> {
             this.userFrom = new User(data);
         })
@@ -43,7 +44,9 @@ export class NotificationComponent implements OnInit{
 
         dialogRef.afterClosed().subscribe((data)=> {
             if (data){
-                console.log(data);
+                this.gData.getGroup(this.notification.data).subscribe((group:Group)=> {
+                    group.membersIDs
+                })
             }
         })
     }

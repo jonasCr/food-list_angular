@@ -13,7 +13,7 @@
                 </div>
                 <div class="col" *ngIf="!meal.name">
                     <mat-form-field>
-                        <mat-select (selectionChange)="onChange($event, iMenu, iMeal)" placeholder="Elige una receta">
+                        <mat-select (selectionChange)="onChange($event, iMenu, iMeal)" [placeholder]="translate.instant('VIEWS.CALENDAR.SELECT_RECIPE')">
                             <mat-option #selectRecipe *ngFor="let recipe of recipes; let i = index" [value]="i">
                                 {{recipe.name}}
                             </mat-option>

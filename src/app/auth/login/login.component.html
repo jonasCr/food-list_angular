@@ -2,26 +2,22 @@
     <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
         <div>
             <mat-form-field>
-                <input formControlName="email" matInput placeholder="Email">
-                <mat-error *ngIf="loginForm.controls['email'].errors?.required && loginForm.dirty">
-                    Este campo es requerido
+                <input formControlName="email" matInput [placeholder]="translate.instant('AUTH.LOGIN.FIELDS.EMAIL')">
+                <mat-error [translate]="'GLOBAL.FORMS.ERRORS.REQUIRED'" *ngIf="loginForm.controls['email'].errors?.required && loginForm.dirty">
                 </mat-error>
-                <mat-error *ngIf="loginForm.controls['email'].errors?.email && loginForm.dirty">
-                    El correo no es valido
+                <mat-error [translate]="'GLOBAL.FORMS.ERRORS.EMAIL'" *ngIf="loginForm.controls['email'].errors?.email && loginForm.dirty">
                 </mat-error>
             </mat-form-field>
         </div>
         <div>
             <mat-form-field>
-                <input type="password" formControlName="password" matInput placeholder="Contraseña">
-                <mat-error *ngIf="loginForm.controls['password'].errors?.required != null && loginForm.dirty">
-                    Este campo es requerido
+                <input type="password" formControlName="password" matInput [placeholder]="translate.instant('AUTH.LOGIN.FIELDS.PASSWORD')">
+                <mat-error [translate]="'GLOBAL.FORMS.ERRORS.REQUIRED'" *ngIf="loginForm.controls['password'].errors?.required != null && loginForm.dirty">
                 </mat-error>
-                <mat-error *ngIf="loginForm.controls['password'].errors?.minlength && loginForm.dirty">
-                    La contraseña debe tener minimo 6 caracteres
+                <mat-error [translate]="'GLOBAL.FORMS.ERRORS.MINLENGTH'" [translateParams]="{'minLength': 6}" *ngIf="loginForm.controls['password'].errors?.minlength && loginForm.dirty">
                 </mat-error>
             </mat-form-field>
         </div>
-        <button type="submit" mat-raised-button>Login</button>
+        <button type="submit" mat-raised-button>{{'ACTIONS.LOGIN' | translate}}</button>
     </form>
 </div>

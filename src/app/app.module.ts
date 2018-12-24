@@ -35,6 +35,11 @@ import { RecipeDetailsComponent } from './shared/components/recipe-details/recip
 import { RangeDayComponent } from './shared/components/range-day/range-day-component';
 import { AuthModule } from './auth/auth.module';
 
+//traduction
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+
 
 
 
@@ -66,7 +71,15 @@ import { AuthModule } from './auth/auth.module';
     FormsModule,
     AuthModule,
     APP_ROUTES,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+        }
+    })
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' }
@@ -74,3 +87,8 @@ import { AuthModule } from './auth/auth.module';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

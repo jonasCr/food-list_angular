@@ -63,12 +63,14 @@ export class UserComponent {
                     membersIDs: [this.authService.user.userId]
                 }
 
-                this.gData.createGroup(new Group(data)).then(()=> {
+                this.gData.createGroup(new Group(data)).then((group)=> {
+                    console.log(group);
                     let pNotification:NotificationParams = {
                         fromIdUser: this.authService.user.userId,
                         toIdUser: data.userInvitadedId,
                         content: 'Quiero añadirte a un grupo',
                         date: new Date(),
+                        data: group.id
                     }
                     this.nData.addNotification(new Notification(pNotification)).then(()=> {
                         this.gService.progress = false;

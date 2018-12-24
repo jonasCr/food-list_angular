@@ -11,15 +11,15 @@
             <mat-menu class="navbar-menu" #menu="matMenu">
                 <button class="navbar-item" mat-menu-item [routerLink]="['/calendar']">
                     <mat-icon><i class="far fa-calendar-alt"></i></mat-icon>
-                    <span>Calendario</span>
+                    <span>{{'COMPONENTS.NAVBAR.CALENDAR' | translate}}</span>
                 </button>
                 <button class="navbar-item" [routerLink]="[ '/list' ]" mat-menu-item>
                     <mat-icon><i class="fas fa-clipboard-list"></i></mat-icon>
-                    <span>Lista de Comida</span>
+                    <span>{{'COMPONENTS.NAVBAR.FOOD-LIST'| translate}}</span>
                 </button>
                 <button class="navbar-item" [routerLink]="[ '/recipe' ]" mat-menu-item>
                     <mat-icon><i class="fas fa-utensils"></i></mat-icon>
-                    <span>Recettas</span>
+                    <span>{{'COMPONENTS.NAVBAR.RECIPES' | translate}}</span>
                 </button>
             </mat-menu>
 

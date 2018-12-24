@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter, OnInit } from "@angular/core";
 import { query } from "src/app/shared/models/query.model";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector:'app-range-day',
@@ -14,7 +15,9 @@ export class RangeDayComponent implements OnInit{
     firstDayValue:Date = new Date();
     lastDayValue:Date = new Date();
 
-    constructor(){
+    constructor(
+        public translate:TranslateService
+    ){
         //por defecto se añade la semana actual
         let day = new Date();
         let dateString:string = day.getFullYear()+'-'+(day.getMonth()+1)+'-'+day.getDate();

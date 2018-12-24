@@ -1,0 +1,81 @@
+{
+    "GLOBAL": {
+        "FORMS": {
+            "ERRORS" : {
+                "MINLENGTH": "Ese campo debe tener minimo {{minLength}} caracteres",
+                "EMAIL": "El correo no es valido",
+                "REQUIRED": "Ese campo es requerido"
+            }
+        },
+        "WEEKDAYS": {
+            "MONDAY": "Lunes",
+            "TUESDAY": "Martes",
+            "WEDNESDAY": "Miercoles",
+            "THURSDAY": "Jueves",
+            "FRIDAY": "Viernes",
+            "SATURDAY": "Sabado",
+            "SUNDAY" : "Domingo"
+        }
+    },
+    "ACTIONS": {
+        "LOGIN" : "Entrar",
+        "LOGOUT" : "Cerrar session",
+        "CANCEL": "Cancelar",
+        "VALIDATE": "Validar",
+        "OK": "Si",
+        "KO":"No",
+        "REGISTRER": "Crear cuenta",
+        "SEND": "Enviar",
+        "SAVE": "Guardar"
+    },
+    "VIEWS" :{
+        "CALENDAR": {
+            "NOTIFICATION": {
+                "NO_RECIPE": "Tienes que crear recetas antes de poder usar la app"
+            },
+            "SELECT_RECIPE": "Elige una receta"
+        },
+        "FOOD-LIST": {
+
+        },
+        "RECIPES" : {
+
+        },
+        "RECIPE-EDIT" : {
+            "RECIPE-DIALOG-CATEGORY": {}
+        }
+
+    },
+    "COMPONENTS": {
+        "CONFIRM-DIALOG": {},
+        "NAVBAR" :  {
+            "CALENDAR": "Calendario",
+            "FOOD-LIST": "Lista de comida",
+            "RECIPES": "Recetas"
+        },
+        "RANGE-DAY": {
+            "FROM": "Desde",
+            "TO": "Hasta"
+        },
+        "RATE-RECIPE" : {},
+        "RECIPE-DETAILS" :{}
+
+    },
+    "AUTH": {
+        "USER" : {
+            "MESSAGE": "Mensajes",
+            "GROUPS": "Grupos",
+            "ACCOUNT": "Mi cuenta",
+            "INVITE_USER": "Invitar a alguien"
+        },
+        "REGISTRER": {},
+        "NOTIFICATION" : {},
+        "LOGIN": {
+            "FIELDS" : {
+                "EMAIL" : "Correo",
+                "PASSWORD": "Contraseña"
+            }
+        },
+        "GROUP": {}
+    }
+}

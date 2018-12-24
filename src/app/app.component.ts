@@ -6,6 +6,7 @@ import { UserToken } from './shared/models/userToken.model';
 import { UserData } from './data/user/user.data';
 import { User } from './shared/models/user.model';
 import { GroupData } from './data/user/group.data';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,10 @@ export class AppComponent {
   constructor(
       public  _globalService:GlobalService,
       private authService:AuthService,
-      private router:Router
+      private router:Router,
+      private translate:TranslateService
     ){
+      translate.setDefaultLang('es');
       if (localStorage.getItem('user')!= undefined){
         let token:UserToken = JSON.parse(localStorage.getItem('user'));
         let today = new Date();

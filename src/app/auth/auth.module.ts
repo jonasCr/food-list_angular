@@ -12,6 +12,12 @@ import { NotificationDetailsComponent } from './notification/notification-detail
 import { GroupDialogComponent } from './group/group-dialog.component';
 
 
+//traduction
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+
+
 @NgModule({
     declarations: [
         UserComponent,
@@ -30,6 +36,14 @@ import { GroupDialogComponent } from './group/group-dialog.component';
         MaterialModule,
         FormsModule,
         ReactiveFormsModule, 
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })
     ],
     exports: [
         UserComponent,
@@ -40,3 +54,7 @@ import { GroupDialogComponent } from './group/group-dialog.component';
     providers: [],
 })
 export class AuthModule {}
+
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+  }

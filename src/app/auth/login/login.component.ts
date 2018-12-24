@@ -5,6 +5,7 @@ import { UserData } from "src/app/data/user/user.data";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
 import { UserToken } from "src/app/shared/models/userToken.model";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector:'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent {
         private afAuth:AngularFireAuth,
         private userData:UserData,
         private authService:AuthService,
-        private router:Router
+        private router:Router,
+        public translate: TranslateService
     ){
         if (localStorage.getItem('user') != undefined){
             localStorage.removeItem('user');

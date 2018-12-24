@@ -11,19 +11,19 @@
             <mat-icon [matBadge]="authService.unreadNotification" matBadgeColor="warn">
                 <i class="far fa-envelope"></i>
             </mat-icon>
-            <span>Mensajes</span>
+            <span>{{'AUTH.USER.MESSAGE' | translate}}</span>
         </button>
         <button [matMenuTriggerFor]="groups" class="navbar-item" mat-menu-item>
             <mat-icon><i class="fas fa-users"></i></mat-icon>
-            <span>Groupos</span>
+            <span>{{'AUTH.USER.GROUPS' | translate}}</span>
         </button>
         <button class="navbar-item" mat-menu-item>
             <mat-icon><i class="fas fa-user-cog"></i></mat-icon>
-            <span>Mi Cuenta</span>
+            <span>{{'AUTH.USER.ACCOUNT' | translate}}</span>
         </button>
         <button (click)="logOut()" class="navbar-item" mat-menu-item>
             <mat-icon><i class="fas fa-user-times"></i></mat-icon>
-            <span>Cerrar cession</span>
+            <span>{{'ACTIONS.LOGOUT' | translate}}</span>
         </button>
     </div>
 

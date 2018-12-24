@@ -9,6 +9,7 @@ import { NotificationService } from "src/app/services/notificacion.service";
 import { Router } from "@angular/router";
 import { query } from "../../shared/models/query.model";
 import { MenuListService } from "./../../services/list-menu.service";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector:'app-calendar',
@@ -31,7 +32,8 @@ export class CalendarComponent implements OnDestroy{
             private _globalService:GlobalService,
             public _menuList:MenuListService,
             public _menuData:MenuData,
-            public _recipeDate:RecipeData
+            public _recipeDate:RecipeData,
+            public translate:TranslateService
         ){
         this._globalService.setTitle('Calendar');
         this._globalService.progress = true;
@@ -42,7 +44,7 @@ export class CalendarComponent implements OnDestroy{
                 this.recipes.push(new Recipe(recipe));
             }
             if (this.recipes.length == 0){
-                this._notif.showMessage('Tienes que crear recetas antes de poder usar la app');
+                this._notif.showMessage(this.translate.instant('VIEWS.CALENDAR.NOTIFICATION.NO_RECIPE'));
                 this.router.navigate(['/recipe/create'])
             }
             
