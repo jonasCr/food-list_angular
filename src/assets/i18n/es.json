@@ -69,7 +69,9 @@
             "INVITE_USER": "Invitar a alguien"
         },
         "REGISTRER": {},
-        "NOTIFICATION" : {},
+        "NOTIFICATION" : {
+            "NOTIFICATION_SENT": "Se ha enviado una notification al usuario."
+        },
         "LOGIN": {
             "FIELDS" : {
                 "EMAIL" : "Correo",

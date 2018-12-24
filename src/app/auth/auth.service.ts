@@ -15,8 +15,9 @@ export class AuthService {
 
     user:User = null
     userGroups:Group[];
+    activeGroupId: string; 
     notifications:Notification[];
-    unreadNotification:number = 0;
+    unreadNotification:number;
     constructor(
         private afAuth:AngularFireAuth,
         private userData:UserData,
@@ -50,7 +51,7 @@ export class AuthService {
                 const notification = notifications[i];
                 this.notifications.push(new Notification(notification))
                 if (!notification.read){
-                    this.unreadNotification++;
+                    this.unreadNotification ? this.unreadNotification++ : this.unreadNotification = 1
                 }
             }
         })

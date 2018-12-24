@@ -14,6 +14,7 @@ export class GroupData {
 
     //To create a new group of person
     createGroup(group:Group){
+        console.log(group);
         return this.collection.add(group.getData());
     }
 
@@ -27,11 +28,10 @@ export class GroupData {
         );
     }
 
-    //to create the by default group of an user
-    upDateGroup(group:Group){
-        let idGroup = group.idGroup;
-        delete group.idGroup
-        this.collection.doc(idGroup).set(group.getData());
+    updateGroup(group:Group){
+        let data = group.getData();
+        delete data.idGroup;
+        this.collection.doc(group.idGroup).set(data);
     }
 
     getUserGroups(userId:string){

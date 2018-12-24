@@ -11,6 +11,7 @@ import { GlobalService } from "src/app/services/global.service";
 import { NotificationService } from "src/app/services/notificacion.service";
 import { NotificationData } from "src/app/data/user/notification.data";
 import { NotificationParams, Notification } from "src/app/shared/models/notification.model";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector:'app-user',
@@ -29,7 +30,8 @@ export class UserComponent {
         public dialog:MatDialog,
         private gService:GlobalService,
         private nService:NotificationService,
-        private nData:NotificationData
+        private nData:NotificationData,
+        public translate:TranslateService
         ){
             //this.login();
 
@@ -58,23 +60,22 @@ export class UserComponent {
             if(data){
                 console.log(data);
                 this.gService.progress = true;
-                let pGroup:ParamsGroup = {
-                    name : data.nameGroup,
+                let groupParams:ParamsGroup = {
+                    name: data.groupName,
                     membersIDs: [this.authService.user.userId]
                 }
-
-                this.gData.createGroup(new Group(data)).then((group)=> {
+                this.gData.createGroup(new Group(groupParams)).then((group)=> {
                     console.log(group);
                     let pNotification:NotificationParams = {
                         fromIdUser: this.authService.user.userId,
-                        toIdUser: data.userInvitadedId,
+                        toIdUser: data.userInvitated,
                         content: 'Quiero añadirte a un grupo',
                         date: new Date(),
                         data: group.id
                     }
                     this.nData.addNotification(new Notification(pNotification)).then(()=> {
                         this.gService.progress = false;
-                        this.nService.showMessage('Se ha enviado una notification al usuario.')
+                        this.nService.showMessage(this.translate.instant('AUTH.NOTIFICATION.NOTIFICATION_SENT'))
                     })
                 })
 

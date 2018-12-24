@@ -7,6 +7,7 @@ import { MatDialog } from "@angular/material";
 import { NotificationDetailsComponent } from "./notification-details.component";
 import { GroupData } from "src/app/data/user/group.data";
 import { ParamsGroup, Group } from "src/app/shared/models/group.model";
+import { AuthService } from "../auth.service";
 
 @Component({
     selector:'app-notification',
@@ -22,12 +23,12 @@ export class NotificationComponent implements OnInit{
         private nData:NotificationData,
         public dialog: MatDialog,
         private gData:GroupData,
+        private authService:AuthService
     ){
         
 
     }
     ngOnInit(){
-        console.log(this.notification)
         this.userData.getUser(this.notification.fromIdUser).subscribe((data:ParamsUser)=> {
             this.userFrom = new User(data);
         })
@@ -44,8 +45,10 @@ export class NotificationComponent implements OnInit{
 
         dialogRef.afterClosed().subscribe((data)=> {
             if (data){
-                this.gData.getGroup(this.notification.data).subscribe((group:Group)=> {
-                    group.membersIDs
+                let groupObs = this.gData.getGroup(this.notification.data).subscribe((group:Group)=> {
+                    group.membersIDs.push(this.authService.user.userId);
+                    this.gData.updateGroup(group);
+                    groupObs.unsubscribe();
                 })
             }
         })

@@ -2,6 +2,7 @@ import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { Group, ParamsGroup } from "src/app/shared/models/group.model";
 import { UserData } from "src/app/data/user/user.data";
+import { AuthService } from "../auth.service";
 
 @Component({
     selector: 'app-group-dialog',
@@ -16,7 +17,8 @@ export class GroupDialogComponent {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data:any,
         public dialogRef:MatDialogRef<GroupDialogComponent>,
-        private uData:UserData
+        private uData:UserData,
+        private authService:AuthService
     ){
 
     }
@@ -38,8 +40,8 @@ export class GroupDialogComponent {
     
     sendData(){
         let data = {
-            userInvitadedId : this.userInvitadedId,
-            nameGroup: this.nameGroup
+            groupName: this.nameGroup,
+            userInvitated: this.userInvitadedId
         }
 
         this.dialogRef.close(data);
